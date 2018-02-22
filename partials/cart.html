@@ -1,0 +1,167 @@
+<div ng-controller="CartController as ctrl">
+					
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-7">
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<div class="panel-title"><strong><span translate="oym.cart.title.product.info"></span></strong></div>
+					</div>
+					<div class="panel-body">
+						
+						<div ng-if="!ctrl.cartItemList" class="text-center">
+							<h4><strong><span translate="oym.cart.msg.empty"></span></strong></h4>
+						</div>
+						
+						<div ng-if="ctrl.cartItemList" ng-repeat="item in ctrl.cartItemList">
+
+							<hr ng-if="!$first">
+								
+							<div class="row">
+								<div class="col-sm-8 clear-padding-right">
+									<a href="javascript:void(0);" ui-sref="root.product-detail({pid: item.pid})"><div class="cart-img pull-left hidden-xs" style="background-image: url('img/product/{{item.pid}}/0.jpg')"></div></a>
+									<div class="pull-left">
+										<div><h4 class="clear-margin-top clear-margin-bottom"><strong>{{ctrl.productDetailList[item.pid].name}}</strong></h4></div>
+										<div>{{('oym.menu.product.brand.' + ctrl.productDetailList[item.pid].brand) | translate}} - {{('oym.product.detail.gender.' + ctrl.productDetailList[item.pid].sex) | translate}}</div>
+										<br>
+										<div>{{item.color}} - {{item.size}}</div>
+										<div><strong ng-class="{
+											'text-success' : item.status == 'stock',
+											'text-primary' : item.status == 'order'
+										}">{{('oym.product.detail.value.status.' + item.status) | translate}}</strong> - <span translate="oym.cart.property.quantity.short"></span>: {{item.quantity}}</div>
+									</div>
+								</div>
+								<div class="col-sm-4 clear-padding-left text-right">
+									<div ng-if="!ctrl.productDetailList[item.pid].fakeprice && !ctrl.itemDiscount[item.pid][item.status][item.color][item.size]">
+										<div><h4 class="clear-margin-top clear-margin-bottom"><strong>HKD ${{item.price}}</strong></h4></div>
+										<br>
+										<br>
+									</div>
+									
+									<div ng-if="ctrl.productDetailList[item.pid].fakeprice && !ctrl.itemDiscount[item.pid][item.status][item.color][item.size]">
+										<div><h4 class="text-danger clear-margin-top clear-margin-bottom"><strong>HKD ${{item.price}}</strong></h4></div>
+										<div><strike>HKD ${{ctrl.productDetailList[item.pid].fakeprice}}</strike></div>
+										<br>
+									</div>
+									
+									<div ng-if="!ctrl.productDetailList[item.pid].fakeprice && ctrl.itemDiscount[item.pid][item.status][item.color][item.size]">
+										<div><h4 class="text-success clear-margin-top clear-margin-bottom"><strong>HKD ${{item.price - ctrl.itemDiscount[item.pid][item.status][item.color][item.size]}}</strong></h4></div>
+										<div><strike>HKD ${{item.price}}</strike></div>
+										<br>
+									</div>
+									
+									<div ng-if="ctrl.productDetailList[item.pid].fakeprice && ctrl.itemDiscount[item.pid][item.status][item.color][item.size]">
+										<div><h4 class="text-success clear-margin-top clear-margin-bottom"><strong>HKD ${{item.price - ctrl.itemDiscount[item.pid][item.status][item.color][item.size]}}</strong></h4></div>
+										<div><strike class="text-danger">HKD ${{item.price}}</strike></div>
+										<div><strike>HKD ${{ctrl.productDetailList[item.pid].fakeprice}}</strike></div>
+									</div>
+								
+									<div>&nbsp</div>
+									<div><button ng-if="!ctrl.checkingOut" ng-click="ctrl.removeFromCart($index, item.pid, item.status, item.color, item.size)" class="btn btn-warning btn-xs"><span translate="oym.cart.button.remove"></span></button></div>
+								</div>
+							</div>
+
+						</div>	
+						
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-5">					
+				<div class="panel panel-warning" ng-if="ctrl.checkingOut">
+					<div class="panel-heading">
+						<div class="panel-title"><strong><span translate="oym.checkout.title.order.info"></span></strong></div>						
+					</div>
+					<div class="panel-body">
+						<form name="orderForm">
+							<div class="form-group" ng-class="{'has-error has-feedback' : orderForm.name.$touched && !orderForm.name.$valid, 'has-success has-feedback' : orderForm.name.$touched && orderForm.name.$valid}">
+								<label><span translate="oym.checkout.property.name"></span>:</label>
+								<input type="text" class="form-control" name="name" ng-model="ctrl.orderForm.name" maxlength="64" required>
+								<span ng-if="orderForm.name.$touched && orderForm.name.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+								<span ng-if="orderForm.name.$touched && !orderForm.name.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+							</div>
+
+							<div class="form-group" ng-class="{'has-error has-feedback' : orderForm.phone.$touched && !orderForm.phone.$valid, 'has-success has-feedback' : orderForm.phone.$touched && orderForm.phone.$valid}">
+								<label><span translate="oym.checkout.property.phone"></span>:</label>
+								<input type="text" class="form-control" name="phone" ng-model="ctrl.orderForm.phone" minlength="8" maxlength="32" required>
+								<span ng-if="orderForm.phone.$touched && orderForm.phone.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+								<span ng-if="orderForm.phone.$touched && !orderForm.phone.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+							</div>
+
+							<div class="form-group" ng-class="{'has-error has-feedback' : orderForm.email.$touched && !orderForm.email.$valid, 'has-success has-feedback' : orderForm.email.$touched && orderForm.email.$valid}">
+								<label><span translate="oym.checkout.property.email"></span>:</label>
+								<input type="email" class="form-control" name="email" ng-model="ctrl.orderForm.email" maxlength="64" required>
+								<span ng-if="orderForm.email.$touched && orderForm.email.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+								<span ng-if="orderForm.email.$touched && !orderForm.email.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+							</div>
+
+							<div class="form-group" ng-class="{'has-error has-feedback' : orderForm.country.$touched && !orderForm.country.$valid, 'has-success has-feedback' : orderForm.country.$touched && orderForm.country.$valid}">
+								<label><span translate="oym.checkout.property.address"></span>:</label>
+								<input type="text" class="form-control" name="country" ng-model="ctrl.orderForm.country" maxlength="200" required>
+								<span ng-if="orderForm.country.$touched && orderForm.country.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+								<span ng-if="orderForm.country.$touched && !orderForm.country.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+							</div>
+						</form>
+					</div>
+					<div class="panel-footer white-bg">
+						<div class="row">
+							<div class="col-xs-offset-2 col-xs-8">
+								<div class="row">
+									<div class="col-xs-6">
+										<button ng-click="ctrl.cancelCheckOut()" class="btn btn-block btn-default">
+											<span translate="oym.checkout.button.cancel"></span>
+										</button>
+									</div>
+									<div class="col-xs-6">
+										<button ng-click="ctrl.submitOrder(orderForm.$valid)" class="btn btn-block btn-primary">
+											<span translate="oym.checkout.button.submit"></span>
+										</button>	
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<div class="panel-title"><strong><span translate="oym.cart.title.summary"></span></strong></div>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-xs-5">
+								<h4><div><span translate="oym.cart.property.quantity.long"></span>:</div></h4>
+								<h4><div><span translate="oym.cart.property.total"></span>:</div></h4>
+								<h4><div><span translate="oym.cart.property.discount"></span>:</div></h4>
+								<h4><div><span translate="oym.cart.property.coupon"></span>:</div></h4>
+							</div>
+							<div class="col-xs-7 text-right">
+								<h4><div>{{ctrl.orderProperty.quantity}}</div></h4>
+								<h4><div>HKD ${{ctrl.orderProperty.priceOrigin}}</div></h4>
+								<h4><div>- HKD ${{ctrl.orderProperty.discount}}</div></h4>
+								<h4><div>- HKD ${{ctrl.orderProperty.coupon}}</div></h4>
+							</div>
+						</div>
+						
+						<hr>
+						
+						<div class="row">
+							<div class="col-xs-5">
+								<h4 class="clear-margin-top clear-margin-bottom"><strong><span translate="oym.cart.property.order.total"></span>:</strong></h4>
+							</div>
+							<div class="col-xs-7 text-right">
+								<h4 class="clear-margin-top clear-margin-bottom"><strong>HKD ${{ctrl.orderProperty.payableAmount}}</strong></h4>
+							</div>
+						</div>
+					</div>
+					<div class="panel-footer white-bg" ng-if="!ctrl.checkingOut">
+						<div class="row">
+							<div class="col-xs-10 col-xs-offset-1">
+								<button ng-click="ctrl.checkOut()" ng-disabled="!ctrl.cartItemList" class="btn btn-block btn-success"><span translate="oym.cart.button.checkout"></span></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<div>

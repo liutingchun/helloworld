@@ -1,0 +1,261 @@
+<div ng-controller="BannerListController as ctrl">
+	<div class="container-fluid">	
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<strong><span translate="oym.add.banner.title.left"></span></strong>
+				</div>
+			</div>
+			<div class="panel-body panel-body-sm">
+				<div class="row" style="margin: 2px;">
+					<div class="product-row col-xs-6 col-sm-4" ng-repeat="banner in ctrl.bannerList | filter: {bPosition: 0}">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<div class="panel-title">
+									<span translate="oym.add.banner.property.id"></span> #{{banner.bId}}
+								</div>
+							</div>
+							<div class="panel-body panel-body-sm">
+								<div class="product-img" style="background-image: url('img/banner/{{banner.bSource}}')"></div>
+							</div>
+							<div class="panel-footer white-bg">
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="form-group">
+											<label><span translate="oym.add.banner.property.target"></span>:</label>
+											<ui-select ng-model="banner.bType" required on-select="ctrl.updateBanner(banner)">
+												<ui-select-match>
+													{{('oym.add.banner.selection.type.' + $select.selected) | translate}}
+												</ui-select-match>
+												<ui-select-choices repeat="target in (ctrl.selection.target | filter: $select.search)">
+													{{('oym.add.banner.selection.type.' + target) | translate}}
+												</ui-select-choices>
+											</ui-select>
+										</div>
+									</div>
+									<div class="col-xs-12" ng-if="banner.bType != 'tag'">
+										<div class="form-group">
+											<label><span translate="oym.add.banner.property.source"></span>:</label>
+											<input type="text" class="form-control" ng-model="banner.bTarget" ng-blur="ctrl.updateBanner(banner)">
+										</div>
+									</div>
+									<div class="col-xs-12" ng-if="banner.bType == 'tag'">
+										<div class="form-group">
+											<label><span translate="oym.add.banner.property.source"></span>:</label>
+											<ui-select ng-model="banner.bTarget" required on-select="ctrl.updateBanner(banner)">
+												<ui-select-match>
+													{{('oym.product.grid.filter.tag.' + $select.selected) | translate}}
+												</ui-select-match>
+												<ui-select-choices repeat="tag in (ctrl.selection.tag | filter: $select.search)">
+													{{('oym.product.grid.filter.tag.' + tag) | translate}}
+												</ui-select-choices>
+											</ui-select>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="form-group">
+											<label><span translate="oym.add.banner.property.position"></span>:</label>
+											<ui-select ng-model="banner.bPosition" required on-select="ctrl.updateBanner(banner)">
+												<ui-select-match>
+													{{('oym.add.banner.selection.position.' + $select.selected) | translate}}
+												</ui-select-match>
+												<ui-select-choices repeat="url in (ctrl.selection.position | filter: $select.search)">
+													{{('oym.add.banner.selection.position.' + url) | translate}}
+												</ui-select-choices>
+											</ui-select>
+										</div>
+									</div>
+
+									<div class="col-xs-12 xs-margin-b">
+										<button class="btn btn-block btn-default" ng-disabled="$first" ng-click="ctrl.moveForward(banner.index)"><span translate="oym.add.banner.btn.forward"></span></button>
+									</div>
+									
+									<div class="col-xs-12 xs-margin-b">
+										<button class="btn btn-block btn-default" ng-disabled="$last" ng-click="ctrl.moveBackward(banner.index)"><span translate="oym.add.banner.btn.backward"></span></button>
+									</div>
+									
+									<div class="col-xs-12 xs-margin-b">
+										<button class="btn btn-block btn-danger" ng-click="ctrl.deleteBanner(banner)"><span translate="oym.add.banner.btn.delete"></span></button>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<strong><span translate="oym.add.banner.title.right"></span></strong>
+				</div>
+			</div>
+			<div class="panel-body panel-body-sm">
+				<div class="row" style="margin: 2px;">
+					<div class="product-row col-xs-6 col-sm-4" ng-repeat="banner in ctrl.bannerList | filter: {bPosition: 1}">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<div class="panel-title">
+									<span translate="oym.add.banner.property.id"></span> #{{banner.bId}}
+								</div>
+							</div>
+							<div class="panel-body panel-body-sm">
+								<div class="product-img" style="background-image: url('img/banner/{{banner.bSource}}')"></div>
+							</div>
+							<div class="panel-footer white-bg">
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="form-group">
+											<label><span translate="oym.add.banner.property.target"></span>:</label>
+											<ui-select ng-model="banner.bType" required on-select="ctrl.updateBanner(banner)">
+												<ui-select-match>
+													{{('oym.add.banner.selection.type.' + $select.selected) | translate}}
+												</ui-select-match>
+												<ui-select-choices repeat="target in (ctrl.selection.target | filter: $select.search)">
+													{{('oym.add.banner.selection.type.' + target) | translate}}
+												</ui-select-choices>
+											</ui-select>
+										</div>
+									</div>
+									<div class="col-xs-12" ng-if="banner.bType != 'tag'">
+										<div class="form-group">
+											<label><span translate="oym.add.banner.property.source"></span>:</label>
+											<input type="text" class="form-control" ng-model="banner.bTarget" ng-blur="ctrl.updateBanner(banner)">
+										</div>
+									</div>
+									<div class="col-xs-12" ng-if="banner.bType == 'tag'">
+										<div class="form-group">
+											<label><span translate="oym.add.banner.property.source"></span>:</label>
+											<ui-select ng-model="banner.bTarget" required on-select="ctrl.updateBanner(banner)">
+												<ui-select-match>
+													{{('oym.product.grid.filter.tag.' + $select.selected) | translate}}
+												</ui-select-match>
+												<ui-select-choices repeat="tag in (ctrl.selection.tag | filter: $select.search)">
+													{{('oym.product.grid.filter.tag.' + tag) | translate}}
+												</ui-select-choices>
+											</ui-select>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="form-group">
+											<label><span translate="oym.add.banner.property.position"></span>:</label>
+											<ui-select ng-model="banner.bPosition" required on-select="ctrl.updateBanner(banner)">
+												<ui-select-match>
+													{{('oym.add.banner.selection.position.' + $select.selected) | translate}}
+												</ui-select-match>
+												<ui-select-choices repeat="url in (ctrl.selection.position | filter: $select.search)">
+													{{('oym.add.banner.selection.position.' + url) | translate}}
+												</ui-select-choices>
+											</ui-select>
+										</div>
+									</div>
+
+									<div class="col-xs-12 xs-margin-b">
+										<button class="btn btn-block btn-default" ng-disabled="$first" ng-click="ctrl.moveForward(banner.index)"><span translate="oym.add.banner.btn.forward"></span></button>
+									</div>
+									
+									<div class="col-xs-12 xs-margin-b">
+										<button class="btn btn-block btn-default" ng-disabled="$last" ng-click="ctrl.moveBackward(banner.index)"><span translate="oym.add.banner.btn.backward"></span></button>
+									</div>
+									
+									<div class="col-xs-12 xs-margin-b">
+										<button class="btn btn-block btn-danger" ng-click="ctrl.deleteBanner(banner)"><span translate="oym.add.banner.btn.delete"></span></button>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<strong><span translate="oym.add.banner.title.bottom"></span></strong>
+				</div>
+			</div>
+			<div class="panel-body panel-body-sm">
+				<div class="row" style="margin: 2px;">
+					<div class="product-row col-xs-6 col-sm-4" ng-repeat="banner in ctrl.bannerList | filter: {bPosition: 2}">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<div class="panel-title">
+									<span translate="oym.add.banner.property.id"></span> #{{banner.bId}}
+								</div>
+							</div>
+							<div class="panel-body panel-body-sm">
+								<div class="product-img" style="background-image: url('img/banner/{{banner.bSource}}')"></div>
+							</div>
+							<div class="panel-footer white-bg">
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="form-group">
+											<label><span translate="oym.add.banner.property.target"></span>:</label>
+											<ui-select ng-model="banner.bType" required on-select="ctrl.updateBanner(banner)">
+												<ui-select-match>
+													{{('oym.add.banner.selection.type.' + $select.selected) | translate}}
+												</ui-select-match>
+												<ui-select-choices repeat="target in (ctrl.selection.target | filter: $select.search)">
+													{{('oym.add.banner.selection.type.' + target) | translate}}
+												</ui-select-choices>
+											</ui-select>
+										</div>
+									</div>
+									<div class="col-xs-12" ng-if="banner.bType != 'tag'">
+										<div class="form-group">
+											<label><span translate="oym.add.banner.property.source"></span>:</label>
+											<input type="text" class="form-control" ng-model="banner.bTarget" ng-blur="ctrl.updateBanner(banner)">
+										</div>
+									</div>
+									<div class="col-xs-12" ng-if="banner.bType == 'tag'">
+										<div class="form-group">
+											<label><span translate="oym.add.banner.property.source"></span>:</label>
+											<ui-select ng-model="banner.bTarget" required on-select="ctrl.updateBanner(banner)">
+												<ui-select-match>
+													{{('oym.product.grid.filter.tag.' + $select.selected) | translate}}
+												</ui-select-match>
+												<ui-select-choices repeat="tag in (ctrl.selection.tag | filter: $select.search)">
+													{{('oym.product.grid.filter.tag.' + tag) | translate}}
+												</ui-select-choices>
+											</ui-select>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="form-group">
+											<label><span translate="oym.add.banner.property.position"></span>:</label>
+											<ui-select ng-model="banner.bPosition" required on-select="ctrl.updateBanner(banner)">
+												<ui-select-match>
+													{{('oym.add.banner.selection.position.' + $select.selected) | translate}}
+												</ui-select-match>
+												<ui-select-choices repeat="url in (ctrl.selection.position | filter: $select.search)">
+													{{('oym.add.banner.selection.position.' + url) | translate}}
+												</ui-select-choices>
+											</ui-select>
+										</div>
+									</div>
+
+									<div class="col-xs-12 xs-margin-b">
+										<button class="btn btn-block btn-default" ng-disabled="$first" ng-click="ctrl.moveForward(banner.index)"><span translate="oym.add.banner.btn.forward"></span></button>
+									</div>
+									
+									<div class="col-xs-12 xs-margin-b">
+										<button class="btn btn-block btn-default" ng-disabled="$last" ng-click="ctrl.moveBackward(banner.index)"><span translate="oym.add.banner.btn.backward"></span></button>
+									</div>
+									
+									<div class="col-xs-12 xs-margin-b">
+										<button class="btn btn-block btn-danger" ng-click="ctrl.deleteBanner(banner)"><span translate="oym.add.banner.btn.delete"></span></button>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

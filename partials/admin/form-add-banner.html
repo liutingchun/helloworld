@@ -1,0 +1,153 @@
+<div ng-controller="FormAddBannerController as ctrl">
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-xs-12 col-sm-9 col-sm-offset-1">
+				<div class="panel panel-warning">
+					<div class="panel-heading text-center">
+						<div class="panel-title">
+							<strong><span translate="oym.add.banner.title.add"></span><strong>
+						</div>
+					</div>
+					<div class="panel-body">
+						<form name="bannerForm">
+							<div class="row">
+								<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || bannerForm.target.$touched) && !bannerForm.target.$valid, 
+										'has-success has-feedback' : bannerForm.target.$touched && bannerForm.target.$valid
+									}">
+										<label>*<span translate="oym.add.banner.property.target"></span>:</label>
+										<ui-select name="target" ng-model="ctrl.bannerForm.target" required>
+											<ui-select-match>
+												{{('oym.add.banner.selection.type.' + $select.selected) | translate}}
+											</ui-select-match>
+											<ui-select-choices repeat="target in (ctrl.selection.target | filter: $select.search)">
+												{{('oym.add.banner.selection.type.' + target) | translate}}
+											</ui-select-choices>
+										</ui-select>
+										
+										<span ng-if="bannerForm.target.$touched && bannerForm.target.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || bannerForm.target.$touched) && !bannerForm.target.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || bannerForm.target.$touched" ng-messages="bannerForm.target.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.add.banner.error.target.required"></span></small>
+										</div>
+									</div>
+									
+									<div ng-if="!ctrl.bannerForm.target || ctrl.bannerForm.target == 'product' || ctrl.bannerForm.target == 'external'" class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || bannerForm.url.$touched) && !bannerForm.url.$valid, 
+										'has-success has-feedback' : bannerForm.url.$touched && bannerForm.url.$valid
+									}">
+										<label>*<span translate="oym.add.banner.property.source"></span>:</label>
+										<input type="text" class="form-control" name="url" ng-disabled="!ctrl.bannerForm.target" ng-model="ctrl.bannerForm.url" maxlength="500" required ng-focus="ctrl.bannerForm.$urlFocused = true" ng-blur="ctrl.bannerForm.$urlFocused = false">
+										<span ng-if="bannerForm.url.$touched && bannerForm.url.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || bannerForm.url.$touched) && !bannerForm.url.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.bannerForm.$urlFocused">
+											<small class="text-warning" ng-if="ctrl.bannerForm.target == 'product'"><span translate="oym.add.banner.warning.url.product"></span></small>
+											<small class="text-warning" ng-if="ctrl.bannerForm.target == 'external'"><span translate="oym.add.banner.warning.url.external"></span></small>
+										</div>
+										
+										<div ng-if="ctrl.forceDisplayError || bannerForm.url.$touched" ng-messages="bannerForm.url.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.add.banner.error.url.required"></span></small>
+										</div>
+									</div>
+									
+									<div ng-if="ctrl.bannerForm.target == 'tag'" class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || bannerForm.url.$touched) && !bannerForm.url.$valid, 
+										'has-success has-feedback' : bannerForm.url.$touched && bannerForm.url.$valid
+									}">
+										<label>*<span translate="oym.add.banner.property.source"></span>:</label>
+										<ui-select name="url" ng-model="ctrl.bannerForm.url" required>
+											<ui-select-match>
+												{{('oym.product.grid.filter.tag.' + $select.selected) | translate}}
+											</ui-select-match>
+											<ui-select-choices repeat="tag in (ctrl.selection.tag | filter: $select.search)">
+												{{('oym.product.grid.filter.tag.' + tag) | translate}}
+											</ui-select-choices>
+										</ui-select>
+										
+										<span ng-if="bannerForm.url.$touched && bannerForm.url.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || bannerForm.url.$touched) && !bannerForm.url.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || bannerForm.url.$touched" ng-messages="bannerForm.url.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.add.banner.error.url.required"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || bannerForm.position.$touched) && !bannerForm.position.$valid, 
+										'has-success has-feedback' : bannerForm.position.$touched && bannerForm.position.$valid
+									}">
+										<label>*<span translate="oym.add.banner.property.position"></span>:</label>
+										<ui-select name="position" ng-model="ctrl.bannerForm.position" required>
+											<ui-select-match>
+												{{('oym.add.banner.selection.position.' + $select.selected) | translate}}
+											</ui-select-match>
+											<ui-select-choices repeat="position in (ctrl.selection.position | filter: $select.search)">
+												{{('oym.add.banner.selection.position.' + position) | translate}}
+											</ui-select-choices>
+										</ui-select>
+										
+										<span ng-if="bannerForm.position.$touched && bannerForm.position.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || bannerForm.position.$touched) && !bannerForm.position.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || bannerForm.position.$touched" ng-messages="bannerForm.position.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.add.banner.error.position.required"></span></small>
+										</div>
+									</div>
+									
+									<hr>
+									
+									<div class="row" ng-if="ctrl.uploader.queue.length == 0">
+										<div class="col-xs-12">
+											<label class="btn btn-block btn-primary btn-file">
+												<span class="glyphicon glyphicon-upload"></span>
+												<span translate="oym.order.detail.btn.choose.photo"></span>
+												<input type="file" nv-file-select="" uploader="ctrl.uploader" />
+											</label>
+										</div>
+									</div>
+
+									<div ng-repeat="item in ctrl.uploader.queue">
+										<div class="row">
+											<div class="col-xs-12">
+												{{item.file.name}}
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-12 ">
+												<div class="progress xs-margin-b">
+													<div class="progress-bar" role="progressbar" style="width: {{item.progress}}%;"></div>
+												</div>
+											</div>
+										</div>
+										
+										<div class="row">
+											<div class="col-xs-offset-2 col-xs-8">
+												<div class="row">
+													<div class="col-xs-6">
+														<button type="button" class="btn btn-block btn-default" ng-click="item.remove()">
+															<span translate="oym.action.msg.btn.cancel"></span>
+														</button>
+													</div>
+													<div class="col-xs-6">
+														<button type="button" class="btn btn-block btn-success" ng-click="item.upload()">
+															<span translate="oym.action.msg.btn.add"></span>
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

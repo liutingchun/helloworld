@@ -1,0 +1,42 @@
+<div ng-controller="OrderHistoryController as ctrl">
+	<div class="container-fluid">
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+				<div class="panel-title"><strong><span translate="oym.menu.main.order.history"></span></strong></div>
+			</div>
+			
+			<div>
+				<table class="table table-condensed table-hover text-nowrap" datatable="ng" dt-options="ctrl.dtOptions" style="margin-top: 0px; margin-bottom: 0px;">
+					<thead>
+						<tr class="text-center active">
+							<th><span translate="oym.order.detail.property.serial"></span></th>
+							<th><span translate="oym.order.detail.property.date"></span></th>
+							<th><span translate="oym.order.detail.property.item"></span></th>
+							<th><span translate="oym.order.detail.property.total"></span></th>
+							<th><span translate="oym.order.detail.property.paid"></span></th>
+							<th><span translate="oym.order.detail.property.status"></span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="order in ctrl.orderList" ui-sref="root.order-detail({serial: order.oSerial, phone: order.oPhone, email: order.oEmail})" style="cursor: pointer">
+							<td>{{order.oSerial}}</td>
+							<td>{{order.oDate | date : 'yyyy-MM-dd'}}</td>
+							<td>{{order.oItems}}</td>
+							<td>{{order.oTotal}}</td>
+							<td>{{order.oPaid}}</td>
+							<td><strong ng-class="{
+								'text-success' : order.oStatus == 'received',
+								'text-info' : order.oStatus == 'paid',
+								'text-warning' : order.oStatus == 'approved',
+								'text-primary' : order.oStatus == 'arrived',
+								'text-muted' : order.oStatus == 'completed',
+								'text-danger' : order.oStatus == 'cancelled'
+							}">{{('oym.order.detail.order.status.' + order.oStatus) | translate}}</strong></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+</div>

@@ -1,0 +1,60 @@
+<div ng-controller="BatchJobListController as ctrl">
+	<div class="container-fluid">
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<strong><span translate="oym.batch.job.title"></span></strong>
+				</div>
+			</div>
+			<div class="panel-body">
+				<span><span translate="oym.batch.job.warning"></span></span>			
+			</div>
+			
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<th width="20%"><span translate="oym.batch.job.table.name"></span></th>
+						<th width="70%"><span translate="oym.batch.job.table.desc"></span></th>
+						<th width="10%"></th>
+					</thead>
+					<tbody>
+						<tr>
+							<td><span translate="oym.batch.job.r1.name"></span></td>
+							<td><span translate="oym.batch.job.r1.desc"></span></td>
+							<td><button class="btn btn-block btn-primary btn-xs" ng-click="ctrl.updateTranslation()"><span translate="oym.batch.job.table.run"></span></button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<strong>Testing Jobs</strong>
+				</div>
+			</div>
+			<div class="panel-body">
+				<span>This section is for testing jobs.</span>			
+			</div>
+			
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<th width="20%"><span translate="oym.batch.job.table.name"></span></th>
+						<th width="70%"><span translate="oym.batch.job.table.desc"></span></th>
+						<th width="10%"></th>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Send Email</td>
+							<td>Sending email to oymhkstore@gmail.com</td>
+							<td><button class="btn btn-block btn-primary btn-xs" ng-click="ctrl.sendTestEmail()"><span translate="oym.batch.job.table.run"></span></button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,52 @@
+<div ng-controller="FormLoginController as ctrl">
+
+	<div class="jumbotron white-bg">
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+					<div class="panel panel-warning">
+						<div class="panel-heading text-center">
+							<div class="panel-title">
+								<b><span translate="oym.form.login.title"></span></b>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-sm-8 col-sm-offset-2">
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+											<input type="text" class="form-control" placeholder="{{'oym.form.login.username' | translate}}" ng-model="ctrl.username">
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-sm-8 col-sm-offset-2">
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+											<input type="password" class="form-control" placeholder="{{'oym.form.login.password' | translate}}" ng-model="ctrl.password">
+										</div>
+										<a ui-sref="root.info-faq"><span translate="oym.form.login.forgot.password"></span></a>
+									</div>
+								</div>
+							</div>
+								
+							<div class="row xs-margin-t">
+								<div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4">
+									<button class="btn btn-block btn-success" ng-disabled="!ctrl.username || !ctrl.password" ng-click="ctrl.login()">
+										<span translate="oym.form.login.submit"></span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>

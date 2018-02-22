@@ -1,0 +1,155 @@
+<div ng-controller="MenuBarController as ctrl">
+	<nav class="navbar navbar-default navbar-static-top">
+			
+		<div id="info-bar" class="text-center orange-bg">
+			<strong><span translate="oym.home.welcome.msg"></span></strong>
+		</div>
+				
+		<div id="login-bar" class="white-bg">
+			<div class="container-fluid">
+				<img ui-sref="root.home" class="navbar-brand navbar-logo hidden-xs" src="img/design/logo_circle_compressed.png"></img>
+																				
+				<div class="hidden-xs pull-right xs-margin-t xs-margin-b">	
+					<div class="dropdown horizontal-align">
+						<button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							<span class="glyphicon glyphicon-th-list"></span> 
+							<span translate="oym.menu.sub.language"></span>
+							<span class="caret"></span>
+						</button>
+												
+						<ul class="dropdown-menu">
+							<li><a href="javascript:void(0);" ng-click="ctrl.changeLanguage('zhTW')">繁體中文</a></li>
+							<li><a href="javascript:void(0);" ng-click="ctrl.changeLanguage('zhCN')">简体中文</a></li>
+							<li><a href="javascript:void(0);" ng-click="ctrl.changeLanguage('en')">English</a></li>
+						</ul>
+					</div>
+					
+					<a class="btn btn-default btn-sm horizontal-align" ui-sref="root.cart">
+						<span class="glyphicon glyphicon-shopping-cart"></span> 
+						<span translate="oym.menu.sub.cart"></span>
+					</a>
+					
+					<a ng-if="!ctrl.loggedInUser" class="btn btn-primary btn-sm horizontal-align" ui-sref="root.form-register">
+						<span class="glyphicon glyphicon-user"></span> 
+						<span translate="oym.menu.sub.register"></span>
+					</a>
+					
+					<a ng-if="!ctrl.loggedInUser" class="btn btn-success btn-sm horizontal-align" ui-sref="root.form-login">
+						<span class="glyphicon glyphicon-log-in"></span> 
+						<span translate="oym.menu.sub.login"></span>
+					</a>
+					
+					<button ng-if="ctrl.loggedInUser" class="btn btn-danger btn-sm horizontal-align" ng-click="ctrl.logout()">
+						<span class="glyphicon glyphicon-log-out"></span> 
+						<span translate="oym.menu.sub.logout"></span>
+					</button>
+				</div>
+
+				<img ui-sref="root.home" class="center-block hidden-sm hidden-md hidden-lg" style="width: 200px" src="img/design/logo_horizontal_compressed.png"></img>
+				
+				<div class="hidden-sm hidden-md hidden-lg pull-right xs-margin-b">	
+					<div class="dropdown horizontal-align">
+						<button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							<span translate="oym.menu.sub.language"></span>
+							<span class="caret"></span>
+						</button>
+												
+						<ul class="dropdown-menu">
+							<li><a href="javascript:void(0);" ng-click="ctrl.changeLanguage('zhTW')">繁體中文</a></li>
+							<li><a href="javascript:void(0);" ng-click="ctrl.changeLanguage('zhCN')">简体中文</a></li>
+							<li><a href="javascript:void(0);" ng-click="ctrl.changeLanguage('en')">English</a></li>
+						</ul>
+					</div>
+					
+					<a class="btn btn-default btn-xs horizontal-align" ui-sref="root.cart">
+						<span translate="oym.menu.sub.cart"></span>
+					</a>
+					
+					<a ng-if="!ctrl.loggedInUser" class="btn btn-primary btn-xs horizontal-align" ui-sref="root.form-register">
+						<span translate="oym.menu.sub.register"></span>
+					</a>
+					
+					<a ng-if="!ctrl.loggedInUser" class="btn btn-success btn-xs horizontal-align" ui-sref="root.form-login">
+						<span translate="oym.menu.sub.login"></span>
+					</a>
+					
+					<button ng-if="ctrl.loggedInUser" class="btn btn-danger btn-xs horizontal-align" ng-click="ctrl.logout()">
+						<span translate="oym.menu.sub.logout"></span>
+					</button>
+				</div>
+				
+			</div>
+		</div>
+		
+		<div class="navbar-header">
+			<div class="container-fluid">
+			<button type="button" class="navbar-btn btn btn-default btn-sm pull-left hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target="#category-bar" aria-expanded="false" aria-controls="navbar">
+				<span class="glyphicon glyphicon-search"></span> 
+				<span translate="oym.menu.collapse.category"></span>
+				<span class="caret"></span>
+			</button>
+		
+			<button type="button" class="navbar-btn btn btn-default btn-sm pull-right hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target="#menu-bar" aria-expanded="false" aria-controls="navbar">
+				<span class="glyphicon glyphicon-th-list"></span> 
+				<span translate="oym.menu.collapse.menu"></span>
+				<span class="caret"></span>
+			</button>
+			</div>
+		</div>
+					
+		<div id="menu-bar" class="navbar-collapse collapse white-bg">
+			<div class="container-fluid navbar-pad-left-sm">
+				<ul class="nav navbar-nav" ng-if="ctrl.loggedInUser.mLevel != 'admin'">
+					<li ng-if="!ctrl.loggedInUser" ui-sref-active="active"><a ui-sref="root.form-search-order"><span translate="oym.menu.main.order.search"></span></a></li>
+					<li ng-if="ctrl.loggedInUser" ui-sref-active="active"><a ui-sref="root.order-history({phone: null, email: null})"><span translate="oym.menu.main.order.history"></span></a></li>
+					<li ui-sref-active="active"><a ui-sref="root.info-order-guide"><span translate="oym.menu.main.order.guide"></span></a></li>
+					<li ui-sref-active="active"><a ui-sref="root.info-faq"><span translate="oym.menu.main.faq"></span></a></li>
+					<li ui-sref-active="active"><a ui-sref="root.info-contact"><span translate="oym.menu.main.contact.us"></span></a></li>
+					<li ui-sref-active="active"><a ui-sref="root.info-terms"><span translate="oym.menu.main.terms"></span></a></li>
+				</ul>
+				<ul class="nav navbar-nav" ng-if="ctrl.loggedInUser.mLevel == 'admin'">
+				
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
+							<span translate="oym.menu.admin.products"></span>
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li ui-sref-active="active"><a ui-sref="root.admin.form-add-product"><span translate="oym.menu.admin.sub.add.products"></span></a></li>
+							<li ui-sref-active="active"><a ui-sref="root.admin.product-list"><span translate="oym.menu.admin.sub.view.products"></span></a></li>
+							<li role="separator" class="divider"></li>
+							<li ui-sref-active="active"><a ui-sref="root.admin.form-add-discount-group"><span translate="oym.menu.admin.sub.add.discount.group"></span></a></li>
+							<li ui-sref-active="active"><a ui-sref="root.admin.discount-group-list"><span translate="oym.menu.admin.sub.view.discount.groups"></span></a></li>
+						</ul>
+					</li>
+
+					<li ui-sref-active="active"><a ui-sref="root.admin.order-list"><span translate="oym.menu.admin.orders"></span></a></li>
+
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
+							<span translate="oym.menu.admin.banners"></span>
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li ui-sref-active="active"><a ui-sref="root.admin.form-add-banner"><span translate="oym.menu.admin.sub.add.banner"></span></a></li>
+							<li ui-sref-active="active"><a ui-sref="root.admin.banner-list"><span translate="oym.menu.admin.sub.edit.banner"></span></a></li>
+						</ul>
+					</li>
+					
+					<li ui-sref-active="active"><a ui-sref="root.admin.batch-job-list"><span translate="oym.menu.admin.batch"></span></a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="category-bar" class="navbar-collapse collapse navbar-inverse">
+			<div class="container-fluid navbar-pad-left-sm">
+				<ul class="nav navbar-nav">
+					<li ui-sref-active="active"><a ui-sref="root.product-grid({category: 'all'})">{{'oym.menu.product.category.all' | translate}}</a></li>
+					<li ui-sref-active="active" ng-repeat="category in ctrl.productCategoryList"><a ui-sref="root.product-grid({category: category})">{{'oym.menu.product.category.' + category | translate}}</a></li>
+				</ul>
+			</div>
+		</div>
+
+	</nav>
+
+</div>

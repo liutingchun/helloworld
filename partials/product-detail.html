@@ -1,0 +1,148 @@
+<div ng-controller="ProductDetailController as ctrl">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<span class="panel-title"><b><span translate="oym.product.detail.subtitle.preview.image"></span></b></span>
+					</div>
+					<div class="panel-body">
+						<div id="product-detail-gallery" class="carousel slide" data-ride="carousel" data-interval="3000">
+							<!-- Indicators -->
+							<ol class="carousel-indicators">
+								<li ng-repeat="image in ctrl.productImageUrl" data-target="#product-detail-gallery" data-slide-to="{{$index}}" ng-class="{'active' : $index == 0}"></li>
+							</ol>
+
+							<!-- Wrapper for slides -->
+							<div class="carousel-inner">
+								<div ng-repeat="image in ctrl.productImageUrl" class="carousel-img item" ng-class="{'active' : $index == 0}" style="background-image: url('{{image}}')">
+									<!--
+									<div class="carousel-caption">
+										<h3>Caption Text</h3>
+									</div>
+									-->
+								</div>
+							</div>
+
+							<!-- Controls -->
+							<a class="left carousel-control" data-target="#product-detail-gallery" role="button" data-slide="prev">
+								<span class="glyphicon glyphicon-chevron-left"></span>
+							</a>
+							<a class="right carousel-control" data-target="#product-detail-gallery" role="button" data-slide="next">
+								<span class="glyphicon glyphicon-chevron-right"></span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<span class="panel-title"><b><span translate="oym.product.detail.subtitle.product.info"></span></b></span>
+					</div>
+					<div class="panel-body">
+						<div class="text-center">
+							<div><h4><b>{{ctrl.selectedProduct.name}}</b></h4></div>
+							
+							<br>
+							
+							<div>{{('oym.menu.product.brand.' + ctrl.selectedProduct.brand) | translate}}</div>
+							<div>{{ctrl.selectedProduct.color}}</div>
+							<div>{{('oym.product.detail.gender.' + ctrl.selectedProduct.sex) | translate}}</div>
+							
+							<br>
+							
+							<div ng-if="ctrl.selectedProduct.fakeprice"><strike>HKD ${{ctrl.selectedProduct.fakeprice}}</strike></div>
+							<div ng-class="{'text-danger' : ctrl.selectedProduct.fakeprice != 0}"><h4>
+									<b>
+										HKD ${{ctrl.selectedBuySize ? ctrl.selectedBuySize.price : ctrl.selectedProduct.price}}
+									</b>
+								</h4>
+							</div>
+						</div>
+						
+						<div ng-if="ctrl.availableDiscountGroup.length > 0" class="clear-margin-bottom sm-margin-t">
+							<div class="row">
+								<div class="col-xs-offset-1 col-xs-10">
+									<div ng-repeat="discountGroup in ctrl.availableDiscountGroup" class="alert alert-success xs-margin-b" role="alert">
+										<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+										{{('generated.discount.group.desc.' + discountGroup.dId) | translate}}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div ng-if="ctrl.productDescription[0]" class="panel-footer white-bg">
+						<div ng-repeat="text in ctrl.productDescription" class="text-center">{{text}}</div>
+					</div>
+				</div>
+			</div>
+					
+			<div class="col-sm-6">
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<span class="panel-title"><b><span translate="oym.product.detail.subtitle.availability"></span></b></span>
+					</div>
+					<div class="panel-body">
+						<div class="row" ng-if="ctrl.availableBuyStatus.length > 0">
+							<div class="col-md-offset-2 col-md-8">
+								<div class="form-group">
+									<ui-select ng-model="ctrl.selectedBuyStatus">
+										<ui-select-match placeholder="- {{'oym.product.detail.attribute.available.status' | translate}} -">
+											{{('oym.product.detail.value.status.' + $select.selected) | translate}}
+										</ui-select-match>
+										<ui-select-choices repeat="status in (ctrl.availableBuyStatus | filter: $select.search)">
+											{{('oym.product.detail.value.status.' + status) | translate}}
+										</ui-select-choices>
+									</ui-select>
+								
+									<!--<select class="form-control" ng-model="ctrl.selectedBuyStatus" ng-options="status for status in ctrl.availableBuyStatus">
+										<option value="" disabled selected>- {{'oym.product.detail.attribute.available.status' | translate}} -</option>
+									</select>-->
+								</div>
+								<div class="form-group">
+									<ui-select ng-model="ctrl.selectedBuyColor" ng-disabled="!ctrl.selectedBuyStatus">
+										<ui-select-match placeholder="- {{'oym.product.detail.attribute.available.color' | translate}} -">
+											{{$select.selected}}
+										</ui-select-match>
+										<ui-select-choices repeat="color in (ctrl.availableBuyColor[ctrl.selectedBuyStatus] | filter: $select.search)">
+											{{color}}
+										</ui-select-choices>
+									</ui-select>
+								
+									<!--<select class="form-control" ng-model="ctrl.selectedBuyColor" ng-options="status for status in ctrl.availableBuyColor[ctrl.selectedBuyStatus]">
+										<option value="" disabled selected>- {{'oym.product.detail.attribute.available.color' | translate}} -</option>
+									</select>-->
+								</div>
+								<div class="form-group">
+									<ui-select ng-model="ctrl.selectedBuySize" ng-disabled="!ctrl.selectedBuyColor">
+										<ui-select-match placeholder="- {{'oym.product.detail.attribute.available.size' | translate}} -">
+											{{$select.selected.size}}
+										</ui-select-match>
+										<ui-select-choices repeat="size in (ctrl.availableBuySize[ctrl.selectedBuyStatus][ctrl.selectedBuyColor] | filter: $select.search)">
+											{{size.size}}
+										</ui-select-choices>
+									</ui-select>
+									
+									<!--<select class="form-control" ng-model="ctrl.selectedBuySize" ng-options="status for status in ctrl.availableBuySize[ctrl.selectedBuyStatus][ctrl.selectedBuyColor]">
+										<option value="" disabled selected>- {{'oym.product.detail.attribute.available.size' | translate}} -</option>
+									</select>-->
+								</div>
+								<div class="row">
+									<div class="col-xs-offset-2 col-xs-8 col-sm-offset-3 col-sm-6">
+										<button ng-disabled="!ctrl.selectedBuyStatus || !ctrl.selectedBuyColor || !ctrl.selectedBuySize" class="btn btn-block btn-success" ng-click="ctrl.addToCart()">
+											<span translate="oym.product.detail.msg.add.cart"></span>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="text-center" ng-if="ctrl.availableBuyStatus.length == 0">
+							<h4><b><span class="text-danger" translate="oym.product.detail.msg.add.stock.out"></span></b></h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

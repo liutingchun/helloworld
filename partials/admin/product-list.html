@@ -1,0 +1,37 @@
+<div ng-controller="ProductListController as ctrl">
+	<div class="container-fluid">
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+				<div class="panel-title"><strong><span translate="oym.menu.admin.sub.view.products"></span></strong></div>
+			</div>
+			
+			<div>
+				<table class="table table-condensed table-hover text-nowrap" datatable="ng" dt-options="ctrl.dtOptions" style="margin-top: 0px; margin-bottom: 0px;">
+					<thead>
+						<tr class="text-center active">
+							<th><span translate="oym.product.detail.attribute.pid"></span></th>
+							<th><span translate="oym.product.detail.attribute.name"></span></th>
+							<th><span translate="oym.product.detail.attribute.category"></span></th>
+							<th><span translate="oym.product.detail.attribute.brand"></span></th>
+							<th><span translate="oym.product.detail.attribute.color"></span></th>
+							<th><span translate="oym.product.detail.subtitle.preview.image"></span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="product in ctrl.productList" ng-class="{'danger' : product.hide == 1}" ng-click="ctrl.viewProduct(product.pid)" style="cursor: pointer">
+							<td>{{product.pid}}</td>
+							<td>{{product.name}}</td>
+							<td>{{('oym.menu.product.category.' + product.category) | translate}}</td>
+							<td>{{('oym.menu.product.brand.' + product.brand) | translate}}</td>
+							<td>{{product.color}}</td>
+							<th><img style="width: 50px; height: 50px;" ng-src="img/product/{{product.pid}}/0.jpg" /> </th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<!-- ui-sref="root.admin.form-update-product({pid: product.pid})" -->

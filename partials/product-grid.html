@@ -1,0 +1,183 @@
+<div ng-controller="ProductGridController as ctrl">
+	<div id="top-anchor"></div>
+	<div class="container-fluid">
+		
+		<div class="panel-group">
+			<div class="panel panel-warning text-center">
+				<div class="panel-heading" data-toggle="collapse" data-target="#collapse1" style="cursor: pointer">
+					<h4 class="panel-title">
+						<strong>
+							<span translate="oym.product.grid.filter.title"></span>
+						</strong>
+					</h4>
+				</div>
+				<div id="collapse1" class="panel-collapse collapse">
+					<ul class="list-group">
+						<li class="list-group-item">
+							<div class="row">
+								<div class="col-xs-12 col-sm-1 col-sm-offset-1 text-left">
+									<strong><span translate="oym.product.grid.filter.subtitle.category"></span>:</strong>
+								</div>
+								<div class="col-xs-12 col-sm-9 text-left">
+									<ul class="list-inline">
+										<li class="filter-item" ng-repeat="category in ctrl.filterOptions.category">
+											<input icheck ng-model="ctrl.filter.category[category]" type="checkbox" ng-change="ctrl.clickOnFilter()">
+											<span>{{('oym.menu.product.category.' + category) | translate}}</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li class="list-group-item">
+							<div class="row">
+								<div class="col-xs-12 col-sm-1 col-sm-offset-1 text-left">
+									<strong><span translate="oym.product.grid.filter.subtitle.brand"></span>:</strong>
+								</div>
+								<div class="col-xs-12 col-sm-9 text-left">
+									<ul class="list-inline">
+										<li class="filter-item" ng-repeat="brand in ctrl.filterOptions.brand">
+											<input icheck ng-model="ctrl.filter.brand[brand]" type="checkbox" ng-change="ctrl.clickOnFilter()">
+											<span>{{('oym.menu.product.brand.' + brand) | translate}}</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li class="list-group-item">
+							<div class="row">
+								<div class="col-xs-12 col-sm-1 col-sm-offset-1 text-left">
+									<strong><span translate="oym.product.grid.filter.subtitle.tag"></span>:</strong>
+								</div>
+								<div class="col-xs-12 col-sm-9 text-left">
+									<ul class="list-inline">
+										<li class="filter-item" ng-repeat="tag in ctrl.filterOptions.tag">
+											<input icheck ng-model="ctrl.filter.tag[tag]" type="checkbox" ng-change="ctrl.clickOnFilter()">
+											<span>{{('oym.product.grid.filter.tag.' + tag) | translate}}</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li class="list-group-item">
+							<div class="row">
+								<div class="col-xs-12 col-sm-1 col-sm-offset-1 text-left">
+									<strong><span translate="oym.product.grid.filter.subtitle.order"></span>:</strong>
+								</div>
+								<div class="col-xs-12 col-sm-9 text-left">
+									<ul class="list-inline">
+										<li class="filter-item">
+											<input icheck ng-model="ctrl.filter.order" type="radio" value="latest" ng-change="ctrl.clickOnFilter()">
+											<span translate="oym.product.grid.filter.order.latest"></span>
+										</li>
+										<li class="filter-item">
+											<input icheck ng-model="ctrl.filter.order" type="radio" value="price-low-to-high" ng-change="ctrl.clickOnFilter()">
+											<span translate="oym.product.grid.filter.order.price.low.to.high"></span>
+										</li>
+										<li class="filter-item">
+											<input icheck ng-model="ctrl.filter.order" type="radio" value="price-high-to-low" ng-change="ctrl.clickOnFilter()">
+											<span translate="oym.product.grid.filter.order.price.high.to.low"></span>
+										</li>
+										<li class="filter-item">
+											<input icheck ng-model="ctrl.filter.order" type="radio" value="best-sale" ng-change="ctrl.clickOnFilter()">
+											<span translate="oym.product.grid.filter.order.best.sale"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li class="list-group-item">
+							<div class="row">
+								<div class="col-xs-12 col-sm-1 col-sm-offset-1 text-left">
+									<strong><span translate="oym.product.grid.filter.subtitle.item"></span>:</strong>
+								</div>
+								<div class="col-xs-12 col-sm-9 text-left">
+									<ul class="list-inline">
+										<li class="filter-item">
+											<input icheck ng-model="ctrl.filter.item" type="radio" value="24" ng-change="ctrl.clickOnFilter()">
+											<span translate="oym.product.grid.filter.item.24"></span>
+										</li>
+										<li class="filter-item">
+											<input icheck ng-model="ctrl.filter.item" type="radio" value="36" ng-change="ctrl.clickOnFilter()">
+											<span translate="oym.product.grid.filter.item.36"></span>
+										</li>
+										<li class="filter-item">
+											<input icheck ng-model="ctrl.filter.item" type="radio" value="48" ng-change="ctrl.clickOnFilter()">
+											<span translate="oym.product.grid.filter.item.48"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li class="list-group-item">
+							<div class="row">
+								<div class="col-xs-12 col-sm-1 col-sm-offset-1 text-left">
+									<strong><span translate="oym.product.grid.filter.subtitle.search"></span>:</strong>
+								</div>
+								<div class="col-xs-12 col-sm-9 text-left">
+									<!--<div class="input-group">-->
+										<input type="text" class="form-control input-sm" ng-model="ctrl.filter.search" ng-change="ctrl.clickOnFilter()">
+										<!--<span class="input-group-btn">
+											<button class="btn btn-sm btn-warning" type="button" ng-click="ctrl.clickOnFilter()">Go</button>
+										</span>-->
+									<!--</div>-->
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+				
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<ul ng-if="ctrl.pageProductList.length > 1" class="pagination">
+					<li ng-repeat="productList in ctrl.pageProductList" ng-class="{'active' : $index == ctrl.filter.currentPage}">
+						<a href="javascript:void(0);" ng-click="ctrl.changePage($index)">{{$index + 1}}</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+				
+		<div class="row">	
+			<div class="product-grid">
+				<div id="item{{$index}}" ng-repeat="product in ctrl.pageProductList[ctrl.filter.currentPage]" class="product-row col-xs-6 col-sm-4 col-md-3">
+					<div class="panel panel-default" ng-click="ctrl.viewDetail($index, product.pid)" style="cursor: pointer;">
+						<div class="panel-heading panel-body-sm white-bg">
+							<div class="product-img" style="background-image: url('img/product/{{product.pid}}/preview.jpg')"></div>		
+						</div>
+						<div class="panel-body clear-padding-top">
+							<div class="text-nowrap hidden-xs"><h4><strong>{{product.name}}</strong></h4></div>	
+							<div class="text-nowrap hidden-sm hidden-md hidden-lg"><h5><strong>{{product.name}}</strong><h5></div>	
+							<div><span class="hidden-xs"><span translate="oym.product.detail.attribute.brand"></span>: </span>{{('oym.menu.product.brand.' + product.brand) | translate}}</div>
+							<div><span class="hidden-xs"><span translate="oym.product.detail.attribute.color"></span>: </span>{{product.color}}</div>
+							<div><span class="hidden-xs"><span translate="oym.product.detail.attribute.gender"></span>: </span>{{('oym.product.detail.gender.' + product.sex) | translate}}</div>
+						</div>
+						<div class="panel-footer text-center white-bg">
+							<span class="panel-title">
+								HKD 
+								<strike ng-if="product.fakeprice != 0">${{product.fakeprice}}</strike> 
+								<b ng-class="{'text-danger' : product.fakeprice != 0}">${{product.price}}</strong>
+							</span>
+						</div>
+					</div>
+				</div>			
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<ul ng-if="ctrl.pageProductList.length > 1" class="pagination">
+					<li ng-repeat="productList in ctrl.pageProductList" ng-class="{'active' : $index == ctrl.filter.currentPage}">
+						<a href="javascript:void(0);" ng-click="ctrl.changePage($index)">{{$index + 1}}</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="alert alert-danger" role="alert" ng-if="ctrl.pageProductList[ctrl.filter.currentPage].length == 0">
+			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			<span translate="oym.product.grid.msg.no.match"></span>
+		</div>
+		
+	</div>
+</div>

@@ -1,0 +1,152 @@
+<div ng-controller="FormRegisterController as ctrl">
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-xs-12 col-sm-9 col-sm-offset-1">
+				<div class="panel panel-warning">
+					<div class="panel-heading text-center">
+						<div class="panel-title">
+							<b><span translate="oym.form.register.title"></span></b>
+						</div>
+					</div>
+					<div class="panel-body">
+						<form name="registerForm">
+							<div class="row">
+								<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+								
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || registerForm.username.$touched) && !registerForm.username.$valid, 
+										'has-success has-feedback' : registerForm.username.$touched && registerForm.username.$valid}
+									">
+										<label>*<span translate="oym.form.register.username"></span>:</label>
+										<input type="text" class="form-control" name="username" ng-model="ctrl.registerForm.username" minlength="8" maxlength="16" ng-pattern="/^[a-zA-Z0-9]*$/" required>
+										<span ng-if="registerForm.username.$touched && registerForm.username.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || registerForm.username.$touched) && !registerForm.username.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || registerForm.username.$touched" ng-messages="registerForm.username.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.username.required"></span></small>
+											<small ng-message="pattern" class="text-danger"><span translate="oym.form.error.username.pattern"></span></small>
+											<small ng-message="minlength" class="text-danger"><span translate="oym.form.error.username.length"></span></small>
+											<small ng-message="maxlength" class="text-danger"><span translate="oym.form.error.username.length"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || registerForm.password.$touched) && !registerForm.password.$valid, 
+										'has-success has-feedback' : registerForm.password.$touched && registerForm.password.$valid}
+									">
+										<label>*<span translate="oym.form.register.password"></span>:</label>
+										<input type="password" class="form-control" name="password" ng-model="ctrl.registerForm.password" minlength="8" maxlength="16" required>
+										<span ng-if="registerForm.password.$touched && registerForm.password.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || registerForm.password.$touched) && !registerForm.password.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || registerForm.password.$touched" ng-messages="registerForm.password.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.password.required"></span></small>
+											<small ng-message="minlength" class="text-danger"><span translate="oym.form.error.password.length"></span></small>
+											<small ng-message="maxlength" class="text-danger"><span translate="oym.form.error.password.length"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || registerForm.verifyPw.$touched) && !registerForm.verifyPw.$valid, 
+										'has-success has-feedback' : registerForm.verifyPw.$touched && registerForm.verifyPw.$valid}
+									">
+										<label>*<span translate="oym.form.register.verify.password"></span>:</label>
+										<input type="password" class="form-control" name="verifyPw" ng-model="ctrl.registerForm.verifyPw" compare-to="ctrl.registerForm.password" required>
+										<span ng-if="registerForm.verifyPw.$touched && registerForm.verifyPw.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || registerForm.verifyPw.$touched) && !registerForm.verifyPw.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || registerForm.verifyPw.$touched" ng-messages="registerForm.verifyPw.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.verify.required"></span></small>
+											<small ng-message="compareTo" class="text-danger"><span translate="oym.form.error.verify.match"></span></small>
+										</div>
+									</div>
+								
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || registerForm.email.$touched) && !registerForm.email.$valid, 
+										'has-success has-feedback' : registerForm.email.$touched && registerForm.email.$valid && ctrl.registerForm.email}
+									">
+										<label><span translate="oym.form.register.email"></span>:</label>
+										<input type="email" class="form-control" name="email" ng-model="ctrl.registerForm.email" maxlength="64">
+										<span ng-if="registerForm.email.$touched && registerForm.email.$valid && ctrl.registerForm.email" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || registerForm.email.$touched) && !registerForm.email.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="registerForm.email.$touched" ng-messages="registerForm.email.$error">
+											<small ng-message="email" class="text-danger"><span translate="oym.form.error.email.type"></span></small>
+											<small ng-message="maxlength" class="text-danger"><span translate="oym.form.error.email.length"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || registerForm.phone.$touched) && !registerForm.phone.$valid, 
+										'has-success has-feedback' : registerForm.phone.$touched && registerForm.phone.$valid}
+									">
+										<label>*<span translate="oym.form.register.phone"></span>:</label>
+										<input type="text" class="form-control" name="phone" ng-model="ctrl.registerForm.phone" minlength="8" maxlength="32" required>
+										<span ng-if="registerForm.phone.$touched && registerForm.phone.$valid && ctrl.registerForm.phone" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || registerForm.phone.$touched) && !registerForm.phone.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || registerForm.phone.$touched" ng-messages="registerForm.phone.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.phone.required"></span></small>
+											<small ng-message="minlength" class="text-danger"><span translate="oym.form.error.phone.length"></span></small>
+											<small ng-message="maxlength" class="text-danger"><span translate="oym.form.error.phone.length"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || registerForm.address.$touched) && !registerForm.address.$valid, 
+										'has-success has-feedback' : registerForm.address.$touched && registerForm.address.$valid}
+									">
+										<label>*<span translate="oym.form.register.address"></span>:</label>
+										<input type="text" class="form-control" name="address" ng-model="ctrl.registerForm.address" maxlength="200" required>
+										<span ng-if="registerForm.address.$touched && registerForm.address.$valid && ctrl.registerForm.address" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || registerForm.address.$touched) && !registerForm.address.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || registerForm.address.$touched" ng-messages="registerForm.address.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.address.required"></span></small>
+											<small ng-message="maxlength" class="text-danger"><span translate="oym.form.error.address.length"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || registerForm.name.$touched) && !registerForm.name.$valid, 
+										'has-success has-feedback' : registerForm.name.$touched && registerForm.name.$valid && ctrl.registerForm.name}
+									">
+										<label><span translate="oym.form.register.name"></span>:</label>
+										<input type="text" class="form-control" name="name" ng-model="ctrl.registerForm.name" maxlength="64">
+										<span ng-if="registerForm.name.$touched && registerForm.name.$valid && ctrl.registerForm.name" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || registerForm.name.$touched) && !registerForm.name.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="registerForm.name.$touched" ng-messages="registerForm.name.$error">
+											<small ng-message="maxlength" class="text-danger"><span translate="oym.form.error.name.length"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || registerForm.gender.$touched) && !registerForm.gender.$valid, 
+										'has-success has-feedback' : registerForm.gender.$touched && registerForm.gender.$valid && ctrl.registerForm.gender}
+									">
+										<label><span translate="oym.form.register.gender"></span>:</label>
+										<input type="text" class="form-control" name="gender" ng-model="ctrl.registerForm.gender" maxlength="10">
+										<span ng-if="registerForm.gender.$touched && registerForm.gender.$valid && ctrl.registerForm.gender" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || registerForm.gender.$touched) && !registerForm.gender.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="registerForm.gender.$touched" ng-messages="registerForm.gender.$error">
+											<small ng-message="maxlength" class="text-danger"><span translate="oym.form.error.gender.length"></span></small>
+										</div>
+									</div>
+								</div>
+							</div>
+														
+							<div class="row xs-margin-t">
+								<div class="col-xs-offset-3 col-xs-6 col-sm-offset-4 col-sm-4">
+									<button ng-click="ctrl.submitRegistration(registerForm.$valid)" class=" btn btn-block btn-primary"><span translate="oym.form.register.submit"></span></button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,290 @@
+<div ng-controller="OrderDetailController as ctrl">
+					
+	<div class="container-fluid" style="max-width: 900px!important">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<div class="panel-title"><strong><span translate="oym.order.detail.title.product"></span></strong></div>
+					</div>
+					<div class="panel-body">
+					
+						<div ng-repeat="item in ctrl.orderItemList">
+							<hr ng-if="!$first">
+													
+							<div class="row">
+								<div class="col-sm-8 clear-padding-right">
+									<div class="cart-img pull-left hidden-xs" style="background-image: url('img/product/{{item.pId}}/0.jpg')"></div>
+									<div class="pull-left">
+										<div><h4 class="clear-margin-top clear-margin-bottom"><strong>{{ctrl.productDetailList[item.pId].name}}</strong></h4></div>
+										<div>{{('oym.menu.product.brand.' + ctrl.productDetailList[item.pId].brand) | translate}} - {{('oym.product.detail.gender.' + ctrl.productDetailList[item.pId].sex) | translate}}</div>
+										<br>
+										<div>{{item.pColor}} - {{item.pSize}}</div>
+										<div><strong ng-class="{
+											'text-success' : item.iStatus == 'stock',
+											'text-primary' : item.iStatus == 'order',
+											'text-muted' : item.iStatus == 'sent',
+											'text-danger' : item.iStatus == 'cancelled'
+										}">{{('oym.order.detail.item.status.' + item.iStatus) | translate}}</strong></div>
+									</div>
+								</div>
+								<div class="col-sm-4 clear-padding-left text-right">
+									<div><h4 class="clear-margin-top clear-margin-bottom"><strong>HKD ${{item.iPrice}}</strong></h4></div>
+								</div>
+							</div>	
+						</div>				
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-12">
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<div class="panel-title"><strong><span translate="oym.order.detail.title.detail"></span></strong></div>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-xs-5">
+								<h4><div><span translate="oym.order.detail.property.item"></span>:</div></h4>
+								<h4><div><span translate="oym.order.detail.property.total"></span>:</div></h4>
+								<h4><div><span translate="oym.order.detail.property.paid"></span>:</div></h4>
+								<h4><div><span translate="oym.order.detail.property.residue"></span>:</div></h4>
+							</div>
+							<div class="col-xs-7 text-right">
+								<h4><div>{{ctrl.orderDetail.oItems}}</div></h4>
+								<h4><div>HKD ${{ctrl.orderDetail.oTotal}}</div></h4>
+								<h4><div>HKD ${{ctrl.orderDetail.oPaid}}</div></h4>
+								<h4><div>HKD ${{ctrl.orderDetail.oTotal - ctrl.orderDetail.oPaid}}</div></h4>
+							</div>
+						</div>
+						
+						<hr>
+						
+						<div class="row">
+							<div class="col-xs-5">
+								<h4 class="clear-margin-top clear-margin-bottom"><strong><span translate="oym.order.detail.property.status"></span>:</strong></h4>
+							</div>
+							<div class="col-xs-7 text-right">
+								<h4 class="clear-margin-top clear-margin-bottom"><strong ng-class="{
+									'text-success' : ctrl.orderDetail.oStatus == 'received',
+									'text-info' : ctrl.orderDetail.oStatus == 'paid',
+									'text-warning' : ctrl.orderDetail.oStatus == 'approved',
+									'text-primary' : ctrl.orderDetail.oStatus == 'arrived',
+									'text-muted' : ctrl.orderDetail.oStatus == 'completed',
+									'text-danger' : ctrl.orderDetail.oStatus == 'cancelled'
+								}">{{('oym.order.detail.order.status.' + ctrl.orderDetail.oStatus) | translate}}</strong></h4>
+							</div>
+						</div>	
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">									
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<div class="panel-title"><strong><span translate="oym.order.detail.title.status"></span></strong></div>
+					</div>
+					<div class="panel-body text-justify">
+						<div ng-switch="ctrl.orderDetail.oStatus">
+							<div ng-switch-when="received">
+								<div><span translate="oym.order.detail.msg.received.1"></span></div>
+							
+								<br>
+							
+								<uib-accordion close-others="true">
+									<div uib-accordion-group class="panel-default" is-open="ctrl.accordionOpen.hkbank">
+										<uib-accordion-heading>
+											<span translate="oym.order.detail.msg.received.title.hkbank"></span>
+											<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': ctrl.accordionOpen.hkbank, 'glyphicon-chevron-right': !ctrl.accordionOpen.hkbank}"></i>
+										</uib-accordion-heading>
+										<div><span translate="oym.order.detail.msg.received.2"></span></div>
+										<div><span translate="oym.order.detail.msg.received.3"></span></div>
+
+										<br>
+
+										<div><span translate="oym.order.detail.msg.received.4"></span></div>
+										<div><span translate="oym.order.detail.msg.received.5"></span></div>
+										
+										<br>
+										
+										<div><span translate="oym.order.detail.msg.received.6"></span></div>
+										
+										<hr>
+									
+										<div class="row" ng-if="ctrl.uploader.queue.length == 0">
+											<div class="col-xs-10 col-xs-offset-1">
+												<label class="btn btn-block btn-primary btn-file">
+													<span class="glyphicon glyphicon-upload"></span>
+													<span translate="oym.order.detail.btn.choose.photo"></span>
+													<input type="file" nv-file-select="" uploader="ctrl.uploader" />
+												</label>
+											</div>
+										</div>
+
+										<div ng-repeat="item in ctrl.uploader.queue">
+											<div class="row">
+												<div class="col-xs-10 col-xs-offset-1">
+													{{item.file.name}}
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-xs-10 col-xs-offset-1">
+													<div class="progress xs-margin-b">
+														<div class="progress-bar" role="progressbar" style="width: {{item.progress}}%;"></div>
+													</div>
+												</div>
+											</div>
+											
+											<div class="row">
+												<div class="col-xs-offset-2 col-xs-8">
+													<div class="row">
+														<div class="col-xs-6">
+															<button type="button" class="btn btn-block btn-default" ng-click="item.remove()">
+																<span translate="oym.order.detail.btn.cancel"></span>
+															</button>
+														</div>
+														<div class="col-xs-6">
+															<button type="button" class="btn btn-block btn-success" ng-click="item.upload()">
+																<span translate="oym.order.detail.btn.upload"></span>
+															</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div uib-accordion-group class="panel-default" is-open="ctrl.accordionOpen.payme">
+										<uib-accordion-heading>
+											<span translate="oym.order.detail.msg.received.title.payme"></span>
+											<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': ctrl.accordionOpen.payme, 'glyphicon-chevron-right': !ctrl.accordionOpen.payme}"></i>
+										</uib-accordion-heading>
+										
+										<div><span translate="oym.order.detail.msg.received.7"></span></div>
+										
+										<br>
+										
+										<div><span translate="oym.order.detail.msg.received.8"></div>
+										
+										<br>
+										
+										<div><span translate="oym.order.detail.msg.received.9"></div>
+										
+										<br>
+										
+										<div><span translate="oym.order.detail.msg.received.10"></div>
+										
+									</div>
+									<div uib-accordion-group class="panel-default" is-open="ctrl.accordionOpen.paypal">
+										<uib-accordion-heading>
+											<span translate="oym.order.detail.msg.received.title.paypal"></span>
+											<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': ctrl.accordionOpen.paypal, 'glyphicon-chevron-right': !ctrl.accordionOpen.paypal}"></i>
+										</uib-accordion-heading>
+										
+										<div><span translate="oym.order.detail.msg.received.paypal.1"></span></div>
+										
+										<br>
+										
+										<div><span translate="oym.order.detail.msg.received.paypal.2"></span>: HKD ${{ctrl.orderDetail.oTotal}}</div>
+										<div><span translate="oym.order.detail.msg.received.paypal.3"></span>: HKD ${{ctrl.orderDetail.paypal.handling}}</div>
+										
+										<hr>
+										
+										<div class="text-center">
+											<paypal-checkout-button amount="ctrl.orderDetail.paypal.total" callback="ctrl.paypalCallback"></paypal-checkout-button>
+										</div>
+										
+									</div>
+								</uib-accordion>
+							</div>
+							
+							<div ng-switch-when="paid">
+								<div><span translate="oym.order.detail.msg.paid.1"></span></div>
+
+								<br>
+
+								<div><span translate="oym.order.detail.msg.paid.2"></span></div>
+
+								<br>
+
+								<div><span translate="oym.order.detail.msg.paid.3"></span></div>
+							</div>
+							
+							<div ng-switch-when="approved">
+								<div><span translate="oym.order.detail.msg.approved.1"></span></div>
+
+								<br>
+
+								<div><span translate="oym.order.detail.msg.approved.2"></span></div>
+
+								<br>
+
+								<div><span translate="oym.order.detail.msg.approved.3"></span></div>
+							</div>
+							
+							<div ng-switch-when="arrived">
+								<div><span translate="oym.order.detail.msg.arrived.1"></span></div>
+
+								<br>
+
+								<div><span translate="oym.order.detail.msg.arrived.2"></span></div>
+
+								<br>
+
+								<div><span translate="oym.order.detail.msg.arrived.3"></span></div>
+							</div>
+							
+							<div ng-switch-when="completed">
+								<div><span translate="oym.order.detail.msg.completed.1"></span></div>
+
+								<br>
+
+								<div><span translate="oym.order.detail.msg.completed.2"></span></div>
+
+								<br>
+
+								<div><span translate="oym.order.detail.msg.completed.3"></span></div>
+							</div>
+							
+							<div ng-switch-when="cancelled">
+								<div><span translate="oym.order.detail.msg.cancelled.1"></span></div>
+
+								<br>
+
+								<div><span translate="oym.order.detail.msg.cancelled.2"></span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<div class="panel-title"><strong><span translate="oym.order.detail.title.info"></span></strong></div>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-xs-5">
+								<div><h5><span translate="oym.order.detail.property.serial"></span>:</h5></div>
+								<div><h5><span translate="oym.order.detail.property.username"></span>:</h5></div>
+								<div><h5><span translate="oym.order.detail.property.date"></span>:</h5></div>
+								<div><h5><span translate="oym.order.detail.property.name"></span>:</h5></div>
+								<div><h5><span translate="oym.order.detail.property.email"></span>:</h5></div>
+								<div><h5><span translate="oym.order.detail.property.phone"></span>:</h5></div>
+								<div><h5><span translate="oym.order.detail.property.address"></span>:</h5></div>
+							</div>
+							<div class="col-xs-7">
+								<div><h5>{{ctrl.orderDetail.oSerial}}</h5></div>
+								<div><h5>{{ctrl.orderDetail.mUsername}}</h5></div>
+								<div><h5>{{ctrl.orderDetail.oDate}}</h5></div>
+								<div><h5>{{ctrl.orderDetail.oFname}}</h5></div>
+								<div><h5>{{ctrl.orderDetail.oEmail}}</h5></div>
+								<div><h5>{{ctrl.orderDetail.oPhone}}</h5></div>
+								<div style="word-wrap: break-word"><h5>{{ctrl.orderDetail.oLocation}}</h5></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<div>

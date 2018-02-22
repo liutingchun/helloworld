@@ -1,0 +1,50 @@
+<div ng-controller="FormSearchOrderController as ctrl">
+	<div class="jumbotron white-bg">
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+					<div class="panel panel-warning">
+						<div class="panel-heading text-center">
+							<div class="panel-title">
+								<b><span translate="oym.form.order.search.title"></span></b>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-sm-8 col-sm-offset-2">
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+											<input type="text" class="form-control" placeholder="{{'oym.form.order.search.mobile' | translate}}" ng-model="ctrl.phone">
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-sm-8 col-sm-offset-2">
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+											<input type="text" class="form-control" placeholder="{{'oym.form.order.search.email' | translate}}" ng-model="ctrl.email">
+										</div>
+										<a ui-sref="root.info-faq"><span translate="oym.form.order.search.forgot"></span></a>
+									</div>
+								</div>
+							</div>
+							
+							
+								
+							<div class="row xs-margin-t">
+								<div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4">
+									<button class="btn btn-block btn-primary" ng-disabled="!ctrl.phone || !ctrl.email" ng-click="ctrl.submit()"><span translate="oym.form.order.search.submit"></span></button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

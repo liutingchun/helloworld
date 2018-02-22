@@ -1,0 +1,208 @@
+.landing {
+	margin-top: -20px;
+	background-color: #343a40;
+	background: url("../img/design/landing.jpg") no-repeat center center;
+	background-size: cover;
+}
+
+.whatsapp {
+	background-color: #343a40;
+	background: url("../img/design/whatsapp.png") no-repeat center center;
+	background-size: cover;
+}
+
+.overlay {
+	margin: 50px 0;
+	padding: 50px 0;
+	background-color:rgba(255, 255, 255, 0.6);
+}
+
+.white-bg {
+	background-color: #ffffff !important;
+}
+
+.grey-bg {
+	background-color: #eeeeee !important;
+}
+
+.orange-bg {
+	background-color: #ffcc99 !important;
+}
+
+.navbar-logo {			
+	height: 200px;
+	position: absolute; 
+	top: -16px;
+	cursor: pointer;
+}
+			
+.xs-margin-t {
+	margin-top: 10px !important;
+}
+
+.sm-margin-t {
+	margin-top: 25px !important;
+}
+
+.xs-margin-b {
+	margin-bottom: 10px !important;
+}
+
+.xs-padding-t {
+	padding-top: 10px !important;
+}
+
+.xs-padding-b {
+	padding-bottom: 10px !important;
+}
+
+.horizontal-align {
+	display: inline-block !important;
+}
+
+.carousel-img {
+	padding-top: 100%;
+	
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	
+	cursor: pointer;
+}
+
+.carousel-indicators li, 
+.carousel-indicators li.active {
+	margin: 0px 3px !important;
+    width: 35px;
+    height: 4px;
+	border-color: #ffcc00;
+	background-color: #ffcc00 !important;
+}
+
+.carousel-indicators li {
+	opacity: 0.3;
+}
+
+.carousel-indicators li.active {
+	opacity: 1;
+}
+
+.shadow {
+	box-shadow: 2px 2px 2px rgba(20%,20%,40%,0.6),4px 4px 6px rgba(20%,20%,40%,0.4),6px 6px 12px rgba(20%,20%,40%,0.4) !important;
+}	
+	
+.cart-img {
+	width: 100px;
+	height: 100px;
+	
+	margin-right: 5px;
+	
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}	
+	
+.product-img {
+	padding-top: 100%;
+	
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+.admin-product-img {
+	width: 100px;
+	height: 100px;
+
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	
+	border-style: solid;
+	border-width: 1px;
+	margin: 1px;
+}	
+
+.product-row {
+	padding: 2px;
+}
+
+.product-row .panel {
+    overflow: hidden;
+	margin-bottom: 2px
+}
+
+.panel-body-sm {
+	padding: 5px !important;
+}
+
+.clear-padding-top {
+	padding-top: 0 !important;
+}
+
+.clear-padding-bottom {
+	padding-bottom: 0 !important;
+}
+
+.clear-padding-right {
+	padding-right: 0 !important;
+}
+
+.clear-padding-left {
+	padding-left: 0 !important;
+}
+
+.clear-margin-top {
+	margin-top: 0 !important;
+}
+
+.clear-margin-bottom {
+	margin-bottom: 0 !important;
+}
+
+.filter-item {
+	margin: 2px 0px;
+}
+	
+@media (min-width: 768px) {
+	.navbar-pad-left-sm {
+		padding-left: 220px !important;
+	}
+}
+
+.container-fluid {
+	max-width: 1200px !important;
+}
+
+.dropdown.open button .caret{
+    border-top: none;
+    border-bottom: 4px solid #000000;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+form .ui-select-bootstrap .ui-select-toggle > .caret{
+	display: none;
+}
+
+.dataTables_scrollBody {
+	min-height: 300px;
+}

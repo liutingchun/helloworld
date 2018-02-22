@@ -1,0 +1,540 @@
+<div ng-controller="FormUpdateProductController as ctrl">
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<div class="panel-title">
+							<strong><span translate="oym.product.detail.subtitle.basic.info"></span></strong>
+						</div>
+					</div>
+					<div class="panel-body">
+						<form name="productForm">
+							<div class="row">
+								<div class="col-xs-12 col-sm-10 col-sm-offset-1">
+								
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || productForm.productName.$touched) && !productForm.productName.$valid, 
+										'has-success has-feedback' : productForm.productName.$touched && productForm.productName.$valid && ctrl.productForm.productName.length <= 20,
+										'has-warning has-feedback' : productForm.productName.$touched && productForm.productName.$valid && ctrl.productForm.productName.length > 20
+									}">
+										<label>*<span translate="oym.product.detail.attribute.name"></span>:</label>
+										<input type="text" class="form-control" name="productName" ng-model="ctrl.productForm.productName" maxlength="30" required>
+										<span ng-if="productForm.productName.$touched && productForm.productName.$valid && ctrl.productForm.productName.length <= 20" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="productForm.productName.$touched && productForm.productName.$valid && ctrl.productForm.productName.length > 20" class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || productForm.productName.$touched) && !productForm.productName.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.productForm.productName.length > 20">
+											<small class="text-warning"><span translate="oym.form.warning.product.name.length"></span></small>
+										</div>
+										
+										<div ng-if="ctrl.forceDisplayError || productForm.productName.$touched" ng-messages="productForm.productName.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.name.required"></span></small>
+											<small ng-message="maxlength" class="text-danger"><span translate="oym.form.error.product.name.length"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || productForm.brand.$touched) && !productForm.brand.$valid, 
+										'has-success has-feedback' : productForm.brand.$touched && productForm.brand.$valid && ctrl.productForm.brand.length <= 20
+									}">
+										<label>*<span translate="oym.product.detail.attribute.brand"></span>:</label>
+										<ui-select name="brand" ng-model="ctrl.productForm.brand" required>
+											<ui-select-match>
+												{{('oym.menu.product.brand.' + $select.selected) | translate}}
+											</ui-select-match>
+											<ui-select-choices repeat="brand in (ctrl.selection.brand | filter: $select.search)">
+												{{('oym.menu.product.brand.' + brand) | translate}}
+											</ui-select-choices>
+										</ui-select>
+										
+										<span ng-if="productForm.brand.$touched && productForm.brand.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || productForm.brand.$touched) && !productForm.brand.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || productForm.brand.$touched" ng-messages="productForm.brand.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.brand.required"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || productForm.color.$touched) && !productForm.color.$valid, 
+										'has-success has-feedback' : productForm.color.$touched && productForm.color.$valid && ctrl.productForm.color.length <= 20,
+										'has-warning has-feedback' : productForm.color.$touched && productForm.color.$valid && ctrl.productForm.color.length > 20
+									}">
+										<label>*<span translate="oym.product.detail.attribute.color"></span>:</label>
+										<input type="text" class="form-control" name="color" ng-model="ctrl.productForm.color" maxlength="30" required>
+										<span ng-if="productForm.color.$touched && productForm.color.$valid && ctrl.productForm.color.length <= 20" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="productForm.color.$touched && productForm.color.$valid && ctrl.productForm.color.length > 20" class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || productForm.color.$touched) && !productForm.color.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.productForm.color.length > 20">
+											<small class="text-warning"><span translate="oym.form.warning.product.color.length"></span></small>
+										</div>
+										
+										<div ng-if="ctrl.forceDisplayError || productForm.color.$touched" ng-messages="productForm.color.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.color.required"></span></small>
+											<small ng-message="maxlength" class="text-danger"><span translate="oym.form.error.product.color.length"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || productForm.color.$touched) && !productForm.gender.$valid, 
+										'has-success has-feedback' : productForm.gender.$touched && productForm.gender.$valid
+									}">
+										<label>*<span translate="oym.product.detail.attribute.gender"></span>:</label>
+										<ui-select name="gender" ng-model="ctrl.productForm.gender" required>
+											<ui-select-match>
+												{{('oym.product.detail.gender.' + $select.selected) | translate}}
+											</ui-select-match>
+											<ui-select-choices repeat="gender in (ctrl.selection.gender | filter: $select.search)">
+												{{('oym.product.detail.gender.' + gender) | translate}}
+											</ui-select-choices>
+										</ui-select>
+										
+										<span ng-if="productForm.gender.$touched && productForm.gender.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || productForm.gender.$touched) && !productForm.gender.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || productForm.gender.$touched" ng-messages="productForm.gender.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.gender.required"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || productForm.category.$touched) && !productForm.category.$valid, 
+										'has-success has-feedback' : productForm.category.$touched && productForm.category.$valid
+									}">
+										<label>*<span translate="oym.product.detail.attribute.category"></span>:</label>
+										<ui-select name="category" ng-model="ctrl.productForm.category" required>
+											<ui-select-match>
+												{{('oym.menu.product.category.' + $select.selected) | translate}}
+											</ui-select-match>
+											<ui-select-choices repeat="category in (ctrl.selection.category | filter: $select.search)">
+												{{('oym.menu.product.category.' + category) | translate}}
+											</ui-select-choices>
+										</ui-select>
+										
+										<span ng-if="productForm.category.$touched && productForm.category.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || productForm.category.$touched) && !productForm.category.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || productForm.category.$touched" ng-messages="productForm.category.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.category.required"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || productForm.price.$touched) && !productForm.price.$valid, 
+										'has-success has-feedback' : productForm.price.$touched && productForm.price.$valid
+									}">
+										<label>*<span translate="oym.product.detail.attribute.price"></span>:</label>
+										<input type="number" class="form-control" name="price" ng-model="ctrl.productForm.price" required>
+										<span ng-if="productForm.price.$touched && productForm.price.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || productForm.price.$touched) && !productForm.price.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || productForm.price.$touched" ng-messages="productForm.price.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.price.required"></span></small>
+											<small ng-message="number" class="text-danger"><span translate="oym.form.error.product.price.number"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || productForm.fakeprice.$touched) && !productForm.fakeprice.$valid, 
+										'has-success has-feedback' : productForm.fakeprice.$touched && productForm.fakeprice.$valid
+									}">
+										<label>*<span translate="oym.product.detail.attribute.fakeprice"></span>:</label>
+										<input type="number" class="form-control" name="fakeprice" ng-model="ctrl.productForm.fakeprice" required>
+										<span ng-if="productForm.fakeprice.$touched && productForm.fakeprice.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || productForm.fakeprice.$touched) && !productForm.fakeprice.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || productForm.fakeprice.$touched" ng-messages="productForm.fakeprice.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.fakeprice.required"></span></small>
+											<small ng-message="number" class="text-danger"><span translate="oym.form.error.product.fakeprice.number"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || productForm.description.$touched) && !productForm.description.$valid, 
+										'has-success has-feedback' : productForm.description.$touched && productForm.description.$valid
+									}">
+										<label><span translate="oym.product.detail.attribute.remarks"></span>:</label>
+										<textarea type="text" class="form-control" name="description" ng-model="ctrl.productForm.description" maxlength="600"></textarea>
+										<span ng-if="productForm.description.$touched && productForm.description.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || productForm.description.$touched) && !productForm.description.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || productForm.description.$touched" ng-messages="productForm.description.$error">
+											<small ng-message="maxlength" class="text-danger"><span translate="oym.form.error.product.description.length"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || productForm.hide.$touched) && !productForm.hide.$valid, 
+										'has-success has-feedback' : productForm.hide.$touched && productForm.hide.$valid
+									}">
+										<label>*<span translate="oym.product.detail.attribute.hide.show"></span>:</label>
+										<ui-select name="hide" ng-model="ctrl.productForm.hide" required>
+											<ui-select-match>
+												{{('oym.product.detail.hide.' + $select.selected) | translate}}
+											</ui-select-match>
+											<ui-select-choices repeat="hide in (ctrl.selection.hide | filter: $select.search)">
+												{{('oym.product.detail.hide.' + hide) | translate}}
+											</ui-select-choices>
+										</ui-select>
+										
+										<span ng-if="productForm.hide.$touched && productForm.hide.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || productForm.hide.$touched) && !productForm.hide.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || productForm.hide.$touched" ng-messages="productForm.hide.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.hide.required"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || productForm.image.$touched) && !productForm.image.$valid, 
+										'has-success has-feedback' : productForm.image.$touched && productForm.image.$valid
+									}">
+										<label>*<span translate="oym.product.detail.attribute.image"></span>:</label>
+										<input type="number" class="form-control" name="image" ng-model="ctrl.productForm.image" required>
+										<span ng-if="productForm.image.$touched && productForm.image.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || productForm.image.$touched) && !productForm.image.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || productForm.image.$touched" ng-messages="productForm.image.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.image.required"></span></small>
+											<small ng-message="number" class="text-danger"><span translate="oym.form.error.product.image.number"></span></small>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+														
+							<div class="row xs-margin-t">
+								<div class="col-xs-offset-3 col-xs-6 col-sm-offset-4 col-sm-4">
+									<button ng-click="ctrl.submitForm(productForm.$valid)" class="btn btn-block btn-primary"><span translate="oym.form.register.submit"></span></button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<div class="panel-title">
+							<strong><span translate="oym.product.detail.subtitle.advanced.info"></span></strong>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-xs-5">
+								<h4><div><span translate="oym.product.detail.attribute.pid"></span>:</div></h4>
+								<h4><div><span translate="oym.product.detail.attribute.update.date"></span>:</div></h4>
+								<h4><div><span translate="oym.product.detail.attribute.view.count"></span>:</div></h4>
+							</div>
+							<div class="col-xs-7 text-right">
+								<h4><div>{{ctrl.productDetail.pid}}</div></h4>
+								<h4><div>{{ctrl.productDetail.lastEdit | date : 'yyyy-MM-dd'}}</div></h4>
+								<h4><div>{{ctrl.productDetail.viewCount}}</div></h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<div class="panel-title">
+							<strong>#庫存更新</strong>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="row xs-margin-b">
+							<div class="col-xs-10 col-xs-offset-1">
+								<ui-select ng-model="ctrl.stockOperation">
+									<ui-select-match placeholder="- {{'oym.product.detail.attribute.available.operation' | translate}} -">
+										{{('oym.product.detail.value.operation.' + $select.selected) | translate}}
+									</ui-select-match>
+									<ui-select-choices repeat="type in (ctrl.selection.stockOperation | filter: $select.search)">
+										{{('oym.product.detail.value.operation.' + type) | translate}}
+									</ui-select-choices>
+								</ui-select>
+							</div>
+						</div>
+						
+						<div ng-if="ctrl.stockOperation == 'add'">
+							<div class="row xs-margin-b">
+								<div class="col-xs-10 col-xs-offset-1">									
+									<ui-select ng-model="ctrl.addInventory.status">
+										<ui-select-match placeholder="- {{'oym.product.detail.attribute.available.status' | translate}} -">
+											{{('oym.product.detail.value.status.' + $select.selected) | translate}}
+										</ui-select-match>
+										<ui-select-choices repeat="status in (ctrl.selection.status | filter: $select.search)">
+											{{('oym.product.detail.value.status.' + status) | translate}}
+										</ui-select-choices>
+									</ui-select>
+								</div>
+							</div>
+						
+							<div class="row xs-margin-b">
+								<div class="col-xs-10 col-xs-offset-1">
+									<input type="text" class="form-control"  placeholder="- {{'oym.product.detail.attribute.available.color' | translate}} -" ng-model="ctrl.addInventory.color">
+								</div>
+							</div>
+							
+							<div class="row xs-margin-b">
+								<div class="col-xs-10 col-xs-offset-1">
+									<input type="text" class="form-control" placeholder="- {{'oym.product.detail.attribute.available.size' | translate}} -" ng-model="ctrl.addInventory.size">
+								</div>
+							</div>
+						
+							<div class="row xs-margin-b">
+								<div class="col-xs-10 col-xs-offset-1">
+									<input type="number" class="form-control" placeholder="- {{'oym.product.detail.attribute.available.quantity' | translate}} -" ng-model="ctrl.addInventory.quantity">
+								</div>
+							</div>
+							
+							<div class="row xs-margin-b">
+								<div class="col-xs-10 col-xs-offset-1">
+									<input type="number" class="form-control" placeholder="- {{'oym.product.detail.attribute.available.price' | translate}} -" ng-model="ctrl.addInventory.price">
+								</div>
+							</div>
+								
+							<div class="row xs-margin-b">
+								<div class="col-xs-10 col-xs-offset-1">
+									<button class="btn btn-block btn-primary" ng-disabled="!ctrl.addInventory.status || !ctrl.addInventory.color || !ctrl.addInventory.size || !ctrl.addInventory.quantity" ng-click="ctrl.confirmAddInventory()">
+										<span translate="oym.action.msg.btn.add"></span>
+									</button>
+								</div>
+							</div>
+						</div>
+						
+						<div ng-if="ctrl.stockOperation == 'edit'">
+							<div class="text-center" ng-if="ctrl.availableBuyStatus.length == 0">
+								<div class="row xs-margin-b">
+									<div class="col-xs-10 col-xs-offset-1">
+										<div class="well"><h4><b><span class="text-danger" translate="oym.product.detail.msg.add.empty"></span></b></h4></div>
+									</div>
+								</div>
+							</div>
+							
+							<div ng-if="ctrl.availableBuyStatus.length > 0">
+				
+								<div class="row xs-margin-b">
+									<div class="col-xs-10 col-xs-offset-1">
+										<ui-select ng-model="ctrl.selectedBuyStatus">
+											<ui-select-match placeholder="- {{'oym.product.detail.attribute.available.status' | translate}} -">
+												{{('oym.product.detail.value.status.' + $select.selected) | translate}}
+											</ui-select-match>
+											<ui-select-choices repeat="status in (ctrl.availableBuyStatus | filter: $select.search)">
+												{{('oym.product.detail.value.status.' + status) | translate}}
+											</ui-select-choices>
+										</ui-select>
+									</div>
+								</div>
+								<div class="row xs-margin-b">
+									<div class="col-xs-10 col-xs-offset-1">
+										<ui-select ng-model="ctrl.selectedBuyColor" ng-disabled="!ctrl.selectedBuyStatus">
+											<ui-select-match placeholder="- {{'oym.product.detail.attribute.available.color' | translate}} -">
+												{{$select.selected}}
+											</ui-select-match>
+											<ui-select-choices repeat="color in (ctrl.availableBuyColor[ctrl.selectedBuyStatus] | filter: $select.search)">
+												{{color}}
+											</ui-select-choices>
+										</ui-select>
+									</div>
+								</div>
+								<div class="row xs-margin-b">
+									<div class="col-xs-10 col-xs-offset-1">
+										<ui-select ng-model="ctrl.selectedBuySize" ng-disabled="!ctrl.selectedBuyColor">
+											<ui-select-match placeholder="- {{'oym.product.detail.attribute.available.size' | translate}} -">
+												{{$select.selected.size}}
+											</ui-select-match>
+											<ui-select-choices repeat="size in (ctrl.availableBuySize[ctrl.selectedBuyStatus][ctrl.selectedBuyColor] | filter: $select.search)">
+												{{size.size}}
+											</ui-select-choices>
+										</ui-select>
+									</div>
+								</div>
+								<div class="row xs-margin-b">
+									<div class="col-xs-10 col-xs-offset-1">
+										<input type="number" class="form-control" placeholder="- {{'oym.product.detail.attribute.available.quantity' | translate}} -" ng-model="ctrl.selectedBuySize.quantity" ng-disabled="!ctrl.selectedBuySize">
+									</div>
+								</div>
+								<div class="row xs-margin-b">
+									<div class="col-xs-10 col-xs-offset-1">
+										<input type="number" class="form-control" placeholder="- {{'oym.product.detail.attribute.available.price' | translate}} -" ng-model="ctrl.selectedBuySize.price" ng-disabled="!ctrl.selectedBuySize">
+									</div>
+								</div>
+								<div class="row xs-margin-b">
+									<div class="col-xs-5 col-xs-offset-1">
+										<button type="button" class="btn btn-block btn-warning" ng-disabled="!ctrl.selectedBuyStatus || !ctrl.selectedBuyColor || !ctrl.selectedBuySize.size" ng-click="ctrl.confirmDeleteInventory()">
+											<span translate="oym.action.msg.btn.delete"></span>
+										</button>
+									</div>
+									<div class="col-xs-5">
+										<button type="button" class="btn btn-block btn-success" ng-disabled="!ctrl.selectedBuyStatus || !ctrl.selectedBuyColor || !ctrl.selectedBuySize.size || !ctrl.selectedBuySize.quantity" ng-click="ctrl.confirmEditInventory()">
+											<span translate="oym.action.msg.btn.edit"></span>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<div class="panel-title">
+							<strong><span translate="oym.product.detail.subtitle.image.update"></span></strong>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="admin-product-img horizontal-align" style="background-image: url('{{image.src}}')" ng-repeat="image in ctrl.productImageUrl">
+							<div class="white-bg" style="position: absolute;">{{image.id}}</div>
+						</div>
+					</div>
+					<div class="panel-footer white-bg">
+					
+						<div class="row xs-margin-b">
+							<div class="col-xs-10 col-xs-offset-1">
+								<ui-select ng-model="ctrl.imageId" ng-disabled="ctrl.uploader.queue.length > 0">
+									<ui-select-match placeholder="{{'oym.product.detail.msg.select.image.id' | translate}}">
+										{{'oym.product.detail.msg.image.id' | translate}}: #{{$select.selected.id}}
+									</ui-select-match>
+									<ui-select-choices repeat="image in (ctrl.productImageUrl | filter: $select.search)">
+										{{'oym.product.detail.msg.image.id' | translate}}: #{{image.id}}
+									</ui-select-choices>
+								</ui-select>
+							</div>
+						</div>
+
+					
+						<div class="row" ng-if="ctrl.uploader.queue.length == 0">
+							<div class="col-xs-10 col-xs-offset-1">
+								<label class="btn btn-block btn-primary btn-file" ng-disabled="!ctrl.imageId">
+									<span class="glyphicon glyphicon-upload"></span>
+									<span translate="oym.order.detail.btn.choose.photo"></span>
+									<input type="file" nv-file-select="" uploader="ctrl.uploader" ng-disabled="!ctrl.imageId" />
+								</label>
+							</div>
+						</div>
+
+						<div ng-repeat="item in ctrl.uploader.queue">
+							<div class="row">
+								<div class="col-xs-10 col-xs-offset-1">
+									{{item.file.name}}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-10 col-xs-offset-1">
+									<div class="progress xs-margin-b">
+										<div class="progress-bar" role="progressbar" style="width: {{item.progress}}%;"></div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-xs-offset-2 col-xs-8">
+									<div class="row">
+										<div class="col-xs-6">
+											<button type="button" class="btn btn-block btn-default" ng-click="item.remove()">
+												<span translate="oym.order.detail.btn.cancel"></span>
+											</button>
+										</div>
+										<div class="col-xs-6">
+											<button type="button" class="btn btn-block btn-success" ng-click="item.upload()">
+												<span translate="oym.order.detail.btn.upload"></span>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<div class="panel-title">
+							<strong><span translate="oym.product.detail.subtitle.tag.update"></span></strong>
+						</div>
+					</div>
+					<div class="panel-body">
+						<h4>
+							<span class="label label-info" ng-repeat="tag in ctrl.currentTagList" style="margin-right: 5px;">
+								{{('oym.product.grid.filter.tag.' + tag) | translate}}
+							</span>
+						</h4>
+					</div>
+					<div class="panel-footer white-bg">
+						<div class="row">
+							<div class="col-xs-8">
+								<ui-select ng-model="ctrl.selectedTag" required>
+									<ui-select-match placeholder="{{'oym.product.detail.msg.tag.info' | translate}}">
+										{{('oym.product.grid.filter.tag.' + $select.selected) | translate}}
+									</ui-select-match>
+									<ui-select-choices repeat="tag in (ctrl.selection.tag | filter: $select.search)">
+										{{('oym.product.grid.filter.tag.' + tag) | translate}}
+									</ui-select-choices>
+								</ui-select>
+							</div>
+							<div class="col-xs-4">
+								<button class="btn btn-block btn-primary" ng-click="ctrl.addTag()" ng-disabled="!ctrl.selectedTag" ng-if="!ctrl.selectedTag || ctrl.currentTagList.indexOf(ctrl.selectedTag) == -1">
+									<span translate="oym.product.detail.msg.add.tag"></span>
+								</button>
+								<button class="btn btn-block btn-danger" ng-click="ctrl.removeTag()" ng-disabled="!ctrl.selectedTag" ng-if="ctrl.selectedTag && ctrl.currentTagList.indexOf(ctrl.selectedTag) != -1">
+									<span translate="oym.product.detail.msg.remove.tag"></span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<div class="panel-title">
+							<strong><span translate="oym.product.detail.subtitle.discount.group.update"></span></strong>
+						</div>
+					</div>
+					<div class="panel-body">
+						<h4>
+							<span class="label label-info" ng-repeat="discountGroupTag in ctrl.currentDiscountGroupList" style="margin-right: 5px;">
+								{{('oym.product.discount.group.title' | translate) + ' ' + discountGroupTag}}
+							</span>
+						</h4>
+					</div>
+					<div class="panel-footer white-bg">
+						<div class="row">
+							<div class="col-xs-8">
+								<ui-select ng-model="ctrl.selectedDiscountGroup">
+									<ui-select-match placeholder="{{'oym.product.detail.msg.discount.group.tag.info' | translate}}">
+										{{('oym.product.discount.group.title' | translate) + ' ' + $select.selected.dId + ' - ' + $select.selected.dName}}
+									</ui-select-match>
+									<ui-select-choices repeat="group in (ctrl.selection.discountGroup | filter: $select.search)">
+										{{('oym.product.discount.group.title' | translate) + ' ' + group.dId + ' - ' + group.dName}}
+									</ui-select-choices>
+								</ui-select>
+							</div>
+							<div class="col-xs-4">
+								<button class="btn btn-block btn-primary" ng-click="ctrl.addDiscountGroupTag()" ng-disabled="!ctrl.selectedDiscountGroup" ng-if="!ctrl.selectedDiscountGroup || ctrl.currentDiscountGroupList.indexOf(ctrl.selectedDiscountGroup.dId) == -1">
+									<span translate="oym.product.detail.msg.add.tag"></span>
+								</button>
+								<button class="btn btn-block btn-danger" ng-click="ctrl.removeDiscountGroupTag()" ng-disabled="!ctrl.selectedDiscountGroup" ng-if="ctrl.selectedDiscountGroup && ctrl.currentDiscountGroupList.indexOf(ctrl.selectedDiscountGroup.dId) != -1">
+									<span translate="oym.product.detail.msg.remove.tag"></span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>

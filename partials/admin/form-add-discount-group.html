@@ -1,0 +1,139 @@
+<div ng-controller="FormAddDiscountGroupController as ctrl">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-9 col-sm-offset-1">
+				<div class="panel panel-warning">
+					<div class="panel-heading text-center">
+						<div class="panel-title">
+							<strong><span translate="oym.menu.admin.sub.add.discount.group"></span><strong>
+						</div>
+					</div>
+					<div class="panel-body">
+						<form name="discountGroupForm">
+							<div class="row">
+								<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || discountGroupForm.groupName.$touched) && !discountGroupForm.groupName.$valid, 
+										'has-success has-feedback' : discountGroupForm.groupName.$touched && discountGroupForm.groupName.$valid
+									}">
+										<label>*<span translate="oym.product.discount.group.name"></span>:</label>
+										<input type="text" class="form-control" name="groupName" ng-model="ctrl.discountGroupForm.groupName" maxlength="30" required>
+										<span ng-if="discountGroupForm.groupName.$touched && discountGroupForm.groupName.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || discountGroupForm.groupName.$touched) && !discountGroupForm.groupName.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+																				
+										<div ng-if="ctrl.forceDisplayError || discountGroupForm.groupName.$touched" ng-messages="discountGroupForm.groupName.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.discount.name.required"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || discountGroupForm.type.$touched) && !discountGroupForm.type.$valid, 
+										'has-success has-feedback' : discountGroupForm.type.$touched && discountGroupForm.type.$valid
+									}">
+										<label>*<span translate="oym.product.discount.type"></span>:</label>
+										<ui-select name="type" ng-model="ctrl.discountGroupForm.type" required>
+											<ui-select-match>
+												{{('oym.product.discount.selection.type.' + $select.selected) | translate}}
+											</ui-select-match>
+											<ui-select-choices repeat="type in (ctrl.selection.type | filter: $select.search)">
+												{{('oym.product.discount.selection.type.' + type) | translate}}
+											</ui-select-choices>
+										</ui-select>
+										
+										<span ng-if="discountGroupForm.type.$touched && discountGroupForm.type.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || discountGroupForm.type.$touched) && !discountGroupForm.type.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || discountGroupForm.type.$touched" ng-messages="discountGroupForm.type.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.discount.type.required"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || discountGroupForm.discountValue.$touched) && !discountGroupForm.discountValue.$valid, 
+										'has-success has-feedback' : discountGroupForm.discountValue.$touched && discountGroupForm.discountValue.$valid
+									}">
+										<label>
+											*<span translate="oym.product.discount.value"></span>
+											<span ng-if="ctrl.discountGroupForm.type == 'percentage'" translate="oym.product.discount.value.percentage"></span>
+											<span ng-if="ctrl.discountGroupForm.type == 'real'" translate="oym.product.discount.value.real"></span>:
+										</label>
+										<input type="number" class="form-control" name="discountValue" ng-model="ctrl.discountGroupForm.discountValue" required>
+										<span ng-if="discountGroupForm.discountValue.$touched && discountGroupForm.discountValue.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || discountGroupForm.discountValue.$touched) && !discountGroupForm.discountValue.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || discountGroupForm.discountValue.$touched" ng-messages="discountGroupForm.discountValue.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.discount.value.required"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || discountGroupForm.triggerQuantity.$touched) && !discountGroupForm.triggerQuantity.$valid, 
+										'has-success has-feedback' : discountGroupForm.triggerQuantity.$touched && discountGroupForm.triggerQuantity.$valid
+									}">
+										<label>*<span translate="oym.product.discount.trigger.quantity"></span>:</label>
+										<input type="number" class="form-control" name="triggerQuantity" ng-model="ctrl.discountGroupForm.triggerQuantity" required>
+										<span ng-if="discountGroupForm.triggerQuantity.$touched && discountGroupForm.triggerQuantity.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || discountGroupForm.triggerQuantity.$touched) && !discountGroupForm.triggerQuantity.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || discountGroupForm.triggerQuantity.$touched" ng-messages="discountGroupForm.triggerQuantity.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.discount.trigger.quantity.required"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || discountGroupForm.descriptionEn.$touched) && !discountGroupForm.descriptionEn.$valid, 
+										'has-success has-feedback' : discountGroupForm.descriptionEn.$touched && discountGroupForm.descriptionEn.$valid
+									}">
+										<label>*<span translate="oym.product.discount.desc.en"></span>:</label>
+										<textarea type="text" class="form-control" name="descriptionEn" ng-model="ctrl.discountGroupForm.descriptionEn" maxlength="600" required></textarea>
+										<span ng-if="discountGroupForm.descriptionEn.$touched && discountGroupForm.descriptionEn.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || discountGroupForm.descriptionEn.$touched) && !discountGroupForm.descriptionEn.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+																				
+										<div ng-if="ctrl.forceDisplayError || discountGroupForm.descriptionEn.$touched" ng-messages="discountGroupForm.descriptionEn.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.discount.desc.required"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || discountGroupForm.descriptionZhTW.$touched) && !discountGroupForm.descriptionZhTW.$valid, 
+										'has-success has-feedback' : discountGroupForm.descriptionZhTW.$touched && discountGroupForm.descriptionZhTW.$valid
+									}">
+										<label>*<span translate="oym.product.discount.desc.zhTW"></span>:</label>
+										<textarea type="text" class="form-control" name="descriptionZhTW" ng-model="ctrl.discountGroupForm.descriptionZhTW" maxlength="600" required></textarea>
+										<span ng-if="discountGroupForm.descriptionZhTW.$touched && discountGroupForm.descriptionZhTW.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || discountGroupForm.descriptionZhTW.$touched) && !discountGroupForm.descriptionZhTW.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+																				
+										<div ng-if="ctrl.forceDisplayError || discountGroupForm.descriptionZhTW.$touched" ng-messages="discountGroupForm.descriptionZhTW.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.discount.desc.required"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || discountGroupForm.descriptionZhCN.$touched) && !discountGroupForm.descriptionZhCN.$valid, 
+										'has-success has-feedback' : discountGroupForm.descriptionZhCN.$touched && discountGroupForm.descriptionZhCN.$valid
+									}">
+										<label>*<span translate="oym.product.discount.desc.zhCN"></span>:</label>
+										<textarea type="text" class="form-control" name="descriptionZhCN" ng-model="ctrl.discountGroupForm.descriptionZhCN" maxlength="600" required></textarea>
+										<span ng-if="discountGroupForm.descriptionZhCN.$touched && discountGroupForm.descriptionZhCN.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || discountGroupForm.descriptionZhCN.$touched) && !discountGroupForm.descriptionZhCN.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+																				
+										<div ng-if="ctrl.forceDisplayError || discountGroupForm.descriptionZhCN.$touched" ng-messages="discountGroupForm.descriptionZhCN.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.discount.desc.required"></span></small>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row xs-margin-t">
+								<div class="col-xs-offset-3 col-xs-6 col-sm-offset-4 col-sm-4">
+									<button class="btn btn-block btn-primary" ng-click="ctrl.submitForm()" ng-disabled="!discountGroupForm.$valid"><span translate="oym.form.register.submit"></span></button>
+								</div>
+							</div>
+							
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

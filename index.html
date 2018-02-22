@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>On Your Mark HK Premium</title>
+
+	<link rel="icon" type="image/png" href="img/design/fav.png">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- JQuery v3.2.1 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<!-- Bootstrap v3.3.7 -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- Angular JS v1.6.6 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+	
+	<!-- UI-Route -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angular-ui-router/1.0.0-rc.1/angular-ui-router.min.js"></script>
+	
+	<!-- i18n ng-translate -->
+	<script src="lib/bower-angular-translate/angular-translate.min.js"></script>
+	
+	<!-- ocLazyLoad v1.1.0 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/oclazyload/1.1.0/ocLazyLoad.min.js"></script>
+
+	<!-- Angular-Messages -->
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-messages.min.js"></script>-->
+	
+	<!-- Sweet Alert -->
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.5/sweetalert2.all.min.js"></script>-->
+
+	<!-- Angular Datatables -->
+	<!--<script src="lib/angular-datatables/jquery-datatables.min.js"></script>
+	<script src="lib/angular-datatables/angular-datatables.min.js"></script>
+	<link rel="stylesheet" href="lib/angular-datatables/jquery-datatables.min.css" />
+	<link rel="stylesheet" href="lib/angular-datatables/angular-datatables.min.css" />-->
+		
+	<!-- Ng File Upload -->
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-file-upload/2.5.0/angular-file-upload.min.js"></script>-->
+	
+	<!-- iCheck -->
+	<!-- <link href="lib/icheck/skins/square/orange.css" rel="stylesheet">
+	<script src="lib/icheck/icheck.min.js"></script>-->	
+	
+	<!-- Ng Map -->
+	<!--<script src="lib/ng-map/ng-map.min.js"></script>-->
+	
+	<!-- UI Select -->
+	<!--<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.min.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.min.js"></script>-->
+	
+	<!-- UI Bootstrap -->
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>-->
+	
+	<!-- PayPal -->
+	<!--<script src="https://www.paypalobjects.com/api/checkout.js"></script>-->
+	
+	<!-- Custom -->
+	<link rel="stylesheet" href="css/app.css"/>
+		
+	<script src="js/app.js"></script>
+	<script src="js/translate.js"></script>
+	<script src="js/lazyload.js"></script>
+	
+	<script src="js/controllers/root.controller.js"></script>
+	<script src="js/controllers/home.controller.js"></script>
+	<script src="js/controllers/menu-bar.controller.js"></script>
+	<script src="js/controllers/product-grid.controller.js"></script>
+	<script src="js/controllers/product-detail.controller.js"></script>
+	<script src="js/controllers/form-login.controller.js"></script>
+	<script src="js/controllers/form-register.controller.js"></script>
+	<script src="js/controllers/form-search-order.controller.js"></script>
+	<script src="js/controllers/cart.controller.js"></script>
+	<script src="js/controllers/order-history.controller.js"></script>
+	<script src="js/controllers/order-detail.controller.js"></script>
+	
+	<script src="js/controllers/admin/admin-home.controller.js"></script>
+	<script src="js/controllers/admin/form-add-product.controller.js"></script>
+	<script src="js/controllers/admin/form-update-product.controller.js"></script>
+	<script src="js/controllers/admin/product-list.controller.js"></script>
+	<script src="js/controllers/admin/order-list.controller.js"></script>
+	<script src="js/controllers/admin/form-add-banner.controller.js"></script>
+	<script src="js/controllers/admin/banner-list.controller.js"></script>
+	<script src="js/controllers/admin/batch-job-list.controller.js"></script>
+	<script src="js/controllers/admin/form-add-discount-group.controller.js"></script>
+	<script src="js/controllers/admin/discount-group-list.controller.js"></script>
+	
+	<script src="js/services/general.service.js"></script>
+	<script src="js/services/product.service.js"></script>
+	<script src="js/services/authentication.service.js"></script>
+	<script src="js/services/cart.service.js"></script>
+	<script src="js/services/transaction.service.js"></script>
+	<script src="js/services/order.service.js"></script>
+	
+	<script src="js/services/admin/admin-general.service.js"></script>
+	<script src="js/services/admin/admin-product.service.js"></script>
+	<script src="js/services/admin/admin-order.service.js"></script>
+	<script src="js/services/admin/admin-batch.service.js"></script>
+	<script src="js/services/admin/admin-banner.service.js"></script>
+	
+	<!--<script src="js/directives/paypal-checkout-button.directive.js"></script>-->
+	<!--<script src="js/directives/icheck.directive.js"></script>-->
+	<!--<script src="js/directives/compare-to.directive.js"></script>-->
+</head>
+
+<body ng-app="myApp">
+	
+	<div ui-view="root"></div>
+
+</body>
+</html>

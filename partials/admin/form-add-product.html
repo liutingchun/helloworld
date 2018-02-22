@@ -1,0 +1,183 @@
+<div ng-controller="FormAddProductController as ctrl">
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-xs-12 col-sm-9 col-sm-offset-1">
+				<div class="panel panel-warning">
+					<div class="panel-heading text-center">
+						<div class="panel-title">
+							<strong><span translate="oym.menu.admin.sub.add.products"></span></strong>
+						</div>
+					</div>
+					<div class="panel-body">
+						<form name="productForm">
+							<div class="row">
+								<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+								
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || productForm.productName.$touched) && !productForm.productName.$valid, 
+										'has-success has-feedback' : productForm.productName.$touched && productForm.productName.$valid && ctrl.productForm.productName.length <= 20,
+										'has-warning has-feedback' : productForm.productName.$touched && productForm.productName.$valid && ctrl.productForm.productName.length > 20
+									}">
+										<label>*<span translate="oym.product.detail.attribute.name"></span>:</label>
+										<input type="text" class="form-control" name="productName" ng-model="ctrl.productForm.productName" maxlength="30" required>
+										<span ng-if="productForm.productName.$touched && productForm.productName.$valid && ctrl.productForm.productName.length <= 20" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="productForm.productName.$touched && productForm.productName.$valid && ctrl.productForm.productName.length > 20" class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || productForm.productName.$touched) && !productForm.productName.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.productForm.productName.length > 20">
+											<small class="text-warning"><span translate="oym.form.warning.product.name.length"></span></small>
+										</div>
+										
+										<div ng-if="ctrl.forceDisplayError || productForm.productName.$touched" ng-messages="productForm.productName.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.name.required"></span></small>
+											<small ng-message="maxlength" class="text-danger"><span translate="oym.form.error.product.name.length"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || productForm.brand.$touched) && !productForm.brand.$valid, 
+										'has-success has-feedback' : productForm.brand.$touched && productForm.brand.$valid
+									}">
+										<label>*<span translate="oym.product.detail.attribute.brand"></span>:</label>
+										<ui-select name="brand" ng-model="ctrl.productForm.brand" required>
+											<ui-select-match>
+												{{('oym.menu.product.brand.' + $select.selected) | translate}}
+											</ui-select-match>
+											<ui-select-choices repeat="brand in (ctrl.selection.brand | filter: $select.search)">
+												{{('oym.menu.product.brand.' + brand) | translate}}
+											</ui-select-choices>
+										</ui-select>
+										
+										<span ng-if="productForm.brand.$touched && productForm.brand.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || productForm.brand.$touched) && !productForm.brand.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || productForm.brand.$touched" ng-messages="productForm.brand.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.brand.required"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || productForm.color.$touched) && !productForm.color.$valid, 
+										'has-success has-feedback' : productForm.color.$touched && productForm.color.$valid && ctrl.productForm.color.length <= 20,
+										'has-warning has-feedback' : productForm.color.$touched && productForm.color.$valid && ctrl.productForm.color.length > 20
+									}">
+										<label>*<span translate="oym.product.detail.attribute.color"></span>:</label>
+										<input type="text" class="form-control" name="color" ng-model="ctrl.productForm.color" maxlength="30" required>
+										<span ng-if="productForm.color.$touched && productForm.color.$valid && ctrl.productForm.color.length <= 20" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="productForm.color.$touched && productForm.color.$valid && ctrl.productForm.color.length > 20" class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || productForm.color.$touched) && !productForm.color.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.productForm.color.length > 20">
+											<small class="text-warning"><span translate="oym.form.warning.product.color.length"></span></small>
+										</div>
+										
+										<div ng-if="ctrl.forceDisplayError || productForm.color.$touched" ng-messages="productForm.color.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.color.required"></span></small>
+											<small ng-message="maxlength" class="text-danger"><span translate="oym.form.error.product.color.length"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || productForm.color.$touched) && !productForm.gender.$valid, 
+										'has-success has-feedback' : productForm.gender.$touched && productForm.gender.$valid
+									}">
+										<label>*<span translate="oym.product.detail.attribute.gender"></span>:</label>
+										<ui-select name="gender" ng-model="ctrl.productForm.gender" required>
+											<ui-select-match>
+												{{('oym.product.detail.gender.' + $select.selected) | translate}}
+											</ui-select-match>
+											<ui-select-choices repeat="gender in (ctrl.selection.gender | filter: $select.search)">
+												{{('oym.product.detail.gender.' + gender) | translate}}
+											</ui-select-choices>
+										</ui-select>
+										
+										<span ng-if="productForm.gender.$touched && productForm.gender.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || productForm.gender.$touched) && !productForm.gender.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || productForm.gender.$touched" ng-messages="productForm.gender.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.gender.required"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || productForm.category.$touched) && !productForm.category.$valid, 
+										'has-success has-feedback' : productForm.category.$touched && productForm.category.$valid
+									}">
+										<label>*<span translate="oym.product.detail.attribute.category"></span>:</label>
+										<ui-select name="category" ng-model="ctrl.productForm.category" required>
+											<ui-select-match>
+												{{('oym.menu.product.category.' + $select.selected) | translate}}
+											</ui-select-match>
+											<ui-select-choices repeat="category in (ctrl.selection.category | filter: $select.search)">
+												{{('oym.menu.product.category.' + category) | translate}}
+											</ui-select-choices>
+										</ui-select>
+										
+										<span ng-if="productForm.category.$touched && productForm.category.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || productForm.category.$touched) && !productForm.category.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || productForm.category.$touched" ng-messages="productForm.category.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.category.required"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || productForm.price.$touched) && !productForm.price.$valid, 
+										'has-success has-feedback' : productForm.price.$touched && productForm.price.$valid
+									}">
+										<label>*<span translate="oym.product.detail.attribute.price"></span>:</label>
+										<input type="number" class="form-control" name="price" ng-model="ctrl.productForm.price" required>
+										<span ng-if="productForm.price.$touched && productForm.price.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || productForm.price.$touched) && !productForm.price.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || productForm.price.$touched" ng-messages="productForm.price.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.price.required"></span></small>
+											<small ng-message="number" class="text-danger"><span translate="oym.form.error.product.price.number"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || productForm.fakeprice.$touched) && !productForm.fakeprice.$valid, 
+										'has-success has-feedback' : productForm.fakeprice.$touched && productForm.fakeprice.$valid
+									}">
+										<label>*<span translate="oym.product.detail.attribute.fakeprice"></span>:</label>
+										<input type="number" class="form-control" name="fakeprice" ng-model="ctrl.productForm.fakeprice" required>
+										<span ng-if="productForm.fakeprice.$touched && productForm.fakeprice.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || productForm.fakeprice.$touched) && !productForm.fakeprice.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || productForm.fakeprice.$touched" ng-messages="productForm.fakeprice.$error">
+											<small ng-message="required" class="text-danger"><span translate="oym.form.error.product.fakeprice.required"></span></small>
+											<small ng-message="number" class="text-danger"><span translate="oym.form.error.product.fakeprice.number"></span></small>
+										</div>
+									</div>
+									
+									<div class="form-group" ng-class="{
+										'has-error has-feedback' : (ctrl.forceDisplayError || productForm.description.$touched) && !productForm.description.$valid, 
+										'has-success has-feedback' : productForm.description.$touched && productForm.description.$valid
+									}">
+										<label><span translate="oym.product.detail.attribute.remarks"></span>:</label>
+										<textarea type="text" class="form-control" name="description" ng-model="ctrl.productForm.description" maxlength="600"></textarea>
+										<span ng-if="productForm.description.$touched && productForm.description.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+										<span ng-if="(ctrl.forceDisplayError || productForm.description.$touched) && !productForm.description.$valid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+										
+										<div ng-if="ctrl.forceDisplayError || productForm.description.$touched" ng-messages="productForm.description.$error">
+											<small ng-message="maxlength" class="text-danger"><span translate="oym.form.error.product.description.length"></span></small>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+														
+							<div class="row xs-margin-t">
+								<div class="col-xs-offset-3 col-xs-6 col-sm-offset-4 col-sm-4">
+									<button ng-click="ctrl.submitForm(productForm.$valid)" class="btn btn-block btn-primary"><span translate="oym.form.register.submit"></span></button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

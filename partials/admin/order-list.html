@@ -1,0 +1,103 @@
+<div ng-controller="OrderListController as ctrl">
+	<div class="container-fluid">
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+				<div class="panel-title"><strong><span translate="oym.menu.admin.orders"></span></strong></div>
+			</div>
+			
+			<div>
+				<table class="table table-condensed text-nowrap" datatable="ng" dt-options="ctrl.dtOptions" dt-column-defs="ctrl.dtColumnDefs" style="margin-top: 0px; margin-bottom: 0px;">
+					<thead>
+						<tr class="text-center active">
+							<th><span translate="oym.order.detail.property.serial"></span></th>
+							<th><span translate="oym.order.detail.property.date"></span></th>
+							<th><span translate="oym.order.detail.property.phone"></span></th>
+							<th><span translate="oym.order.detail.property.item"></span></th>
+							<th><span translate="oym.order.detail.property.total"></span></th>
+							<th><span translate="oym.order.detail.property.paid"></span></th>
+							<th><span translate="oym.order.detail.property.method"></span></th>
+							<th><span translate="oym.order.detail.property.status"></span></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="order in ctrl.orderList">
+							<td>{{order.oId}}</td>
+							<td>{{order.oDate | date : 'yyyy-MM-dd'}}</td>
+							<td>{{order.oPhone}}</td>
+							<td>{{order.oItems}}</td>
+							<td>{{order.oTotal}}</td>
+							<td>{{order.oPaid}}</td>
+							<td>{{order.oMethod}}</td>
+							<td>								
+								<div ng-if="order.oStatus == 'cancelled'">
+									<strong><span class="text-danger" translate="oym.order.detail.order.status.cancelled"></span></strong>
+								</div>
+								<div ng-if="order.oStatus != 'cancelled'">
+									<ui-select ng-model="order.oStatus" on-select="ctrl.changeStatus(order.oId)">
+										<ui-select-match>
+											<strong><span ng-class="{
+												'text-success' : order.oStatus == 'received',
+												'text-info' : order.oStatus == 'paid',
+												'text-warning' : order.oStatus == 'approved',
+												'text-primary' : order.oStatus == 'arrived',
+												'text-muted' : order.oStatus == 'completed',
+												'text-danger' : order.oStatus == 'cancelled'
+											}">{{('oym.order.detail.order.status.' + $select.selected) | translate}}</span></strong>
+										</ui-select-match>
+										<ui-select-choices repeat="status in (ctrl.statusOption | filter: $select.search)">
+											{{('oym.order.detail.order.status.' + status) | translate}}
+										</ui-select-choices>
+									</ui-select>
+								</div>
+							</td>
+							<td>
+								<div class="dropdown">
+									<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> 
+										<span translate="oym.order.detail.property.action"></span>
+										<span class="caret"></span>
+									</button>
+															
+									<ul class="dropdown-menu dropdown-menu-right">
+										<li>
+											<a href="javascript:void(0);" ui-sref="root.order-detail({serial: order.oSerial, phone: order.oPhone, email: order.oEmail})" target="_blank">
+												<span translate="oym.order.detail.admin.view"></span>
+											</a>
+										</li>
+										<li ng-if="order.oMethod == 'deposit'">
+											<a href="javascript:void(0);" ng-click="ctrl.showReceipt(order.oId)">
+												<span translate="oym.order.detail.admin.receipt"></span>
+											</a>
+										</li>
+										<li ng-if="order.oMethod == 'paypal'">
+											<a href="javascript:void(0);" ng-click="ctrl.showRemarks('HKD $' + order.oRemarks)">
+												<span translate="oym.order.detail.admin.check.amount"></span>
+											</a>
+										</li>
+										<li role="separator" class="divider"></li>
+										<li>
+											<a href="javascript:void(0);" ng-click="ctrl.setPaidAmount(order.oId)">
+												<span translate="oym.order.detail.admin.set.paid"></span>
+											</a>
+										</li>
+										<li>
+											<a href="javascript:void(0);" ng-click="ctrl.archive(order.oId)">
+												<span translate="oym.order.detail.admin.archive"></span>
+											</a>
+										</li>
+										<li ng-if="order.oStatus != 'cancelled'">
+											<a href="javascript:void(0);" ng-click="ctrl.cancelOrder(order.oId)">
+												<span translate="oym.order.detail.admin.cancel"></span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+</div>

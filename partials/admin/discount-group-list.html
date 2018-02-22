@@ -1,0 +1,84 @@
+<div ng-controller="DiscountGroupListController as ctrl">
+	<div class="container-fluid">
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+				<div class="panel-title"><strong><span translate="oym.menu.admin.sub.view.discount.groups"></span></strong></div>
+			</div>
+			
+			<div class="panel-body">
+				<uib-accordion close-others="true">
+					<div uib-accordion-group class="panel-default" ng-repeat="discountGroup in ctrl.discountGroupList" is-open="ctrl.accordionOpen[discountGroup.dId]">
+						<uib-accordion-heading>
+							<span translate="oym.product.discount.group.title"></span> {{discountGroup.dId}} - {{discountGroup.dName}}
+							<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': ctrl.accordionOpen[discountGroup.dId], 'glyphicon-chevron-right': !ctrl.accordionOpen[discountGroup.dId]}"></i>
+						</uib-accordion-heading>
+						
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>*<span translate="oym.product.discount.group.name"></span></label>
+									<input type="text" class="form-control" ng-model="discountGroup.dName" maxlength="30">
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>*<span translate="oym.product.discount.trigger.quantity"></span></label>
+									<input type="number" class="form-control" ng-model="discountGroup.dQuantity">
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>*<span translate="oym.product.discount.type"></span></label>
+									<ui-select name="type" ng-model="discountGroup.dType">
+										<ui-select-match>
+											{{('oym.product.discount.selection.type.' + $select.selected) | translate}}
+										</ui-select-match>
+										<ui-select-choices repeat="type in (ctrl.selection.type | filter: $select.search)">
+											{{('oym.product.discount.selection.type.' + type) | translate}}
+										</ui-select-choices>
+									</ui-select>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>
+										*<span translate="oym.product.discount.value"></span>
+										<span ng-if="discountGroup.dType == 'percentage'" translate="oym.product.discount.value.percentage"></span>
+										<span ng-if="discountGroup.dType == 'real'" translate="oym.product.discount.value.real"></span>
+									</label>
+									<input type="number" class="form-control" ng-model="discountGroup.dValue">
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>*<span translate="oym.product.discount.desc.en"></span></label>
+									<textarea class="form-control" ng-model="discountGroup.dDescEn" maxlength="600"></textarea>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>*<span translate="oym.product.discount.desc.zhTW"></span></label>
+									<textarea class="form-control" ng-model="discountGroup.dDescZhTW" maxlength="600"></textarea>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>*<span translate="oym.product.discount.desc.zhCN"></span></label>
+									<textarea class="form-control" ng-model="discountGroup.dDescZhCN" maxlength="600"></textarea>
+								</div>
+							</div>
+						</div>
+						
+						<hr>
+					
+						<div class="text-center">
+							<button class="btn btn-lg btn-success" ng-click="ctrl.updateDiscountGroup(discountGroup)">
+								<span translate="oym.action.msg.btn.edit"></span>
+							</button>
+						</div>
+					</div>
+				</uib-accordion>
+			</div>
+		</div>
+	</div>
+</div>
